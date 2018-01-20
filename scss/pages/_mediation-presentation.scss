@@ -1,0 +1,285 @@
+body {
+    width : 100%;
+    height : 100%;
+    font-family : $font-main;
+    font-size : 1.8rem;
+    line-height : 1.6;
+    color : $able-grey;
+    // @include verticalGradient($white, $able-green);
+    background-color : lighten( $able-green, 30% );
+
+    // could just change bg colour with javascript, no luck with gradient and viewport - 100vh
+}
+
+
+
+
+
+
+
+
+// brand header
+.header {
+    width : 100%;
+    position : fixed;
+    top : 0;
+    left : 0;
+    right : 0;
+    z-index : 5;
+    @include verticalGradient($black_a, transparent);
+    .container {
+        display : flex;
+        justify-content : space-between; 
+        align-items : center;
+        padding-top : 2rem;
+        padding-bottom : 2rem;
+        .logo {
+            display : flex;
+            flex-direction : column;
+            align-items : center;
+            text-decoration : none;
+            color : $able-grey;
+            font-weight : $bold;
+            line-height : 1;
+            span {
+                color : $able-green;
+            }
+        }
+        .share {
+            display : flex;
+            align-items : center;
+            text-transform : uppercase;
+            font-size : 1.4rem;
+            a {
+                text-decoration : none;
+                color : $able-grey;
+                font-size : 1.8rem;
+                margin-left : 1.5rem;
+            }
+        }
+        // fix flex - can't deal with after
+        &::after{
+            content : none;
+            display : none;
+        }  
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+// main animation container
+.animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: auto;
+    bottom : 0; // -added
+    // overflow: hidden; -taken away
+    // sections
+    > div {
+        position : relative;
+        width: 100%;
+        height: 100%;
+        overflow : hidden;
+        box-sizing : border-box;
+        // vertical align - requires flex on all containers
+        display : flex;
+        justify-content : center;
+        // border-top:1px solid black;
+        // border-bottom:1px solid black;
+
+
+        // all containers
+        .container {
+            z-index : 2;
+            display : flex;
+            align-items : center;
+            // center and right align
+            &.center {
+                justify-content : center;
+            }
+            &.right {
+                justify-content : flex-end;
+            }
+            // fix flex - can't deal with after
+            &::after{
+                content : none;
+                display : none;
+            }
+        }
+
+
+        // svg background / cover
+        .bg-graphic {
+            width : 100%;
+            height : 100%;
+            position : absolute;
+            top : 0;
+            left : 0;
+            z-index : 1;
+        }
+        .right-graphic {
+            height : 100%;
+            position : absolute;
+            right : -28%;
+            z-index : 1;
+        }
+    }
+}
+
+
+
+
+
+
+// paragraphs
+.paragraph {
+    border-top : 10px solid;
+    padding-top : 2.5rem;
+    .overview & {
+        border-top-color : $able-green;
+    }
+    .stage-one & {
+        border-top-color : $orange;
+    }
+    .stage-two & {
+        border-top-color : $blue;
+    }
+    .stage-three & {
+        border-top-color : $red;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+// ____________________________________________________________________________
+
+// individual sections
+
+
+// ___________________
+// 1: title
+.title .container {
+    display : flex;
+    flex-direction : column;
+    justify-content : center;
+    align-items : center;
+    text-align : center;
+    height : 100%;
+    z-index : 2;
+    color : $white;
+    animation: fadein 2s;
+    h1 {
+        font-size : 6rem;
+        font-weight : $bold;
+        margin-bottom : 1rem;
+        text-shadow : $text-shadow;
+    }
+    p {
+        font-size : 3rem;
+        font-weight : $normal;
+        padding : 1rem 2.5rem;
+        background-color : rgba( $able-green, .75 );
+    }
+    .fa {
+        font-size : 4.5rem;
+        color : $able-green;
+        position : absolute;
+        bottom : 10%;
+        transform: translateY(0);
+        animation: bounce 1.2s infinite;
+        animation-timing-function: ease;
+    }
+}
+
+
+
+
+// add svg images - top level groups
+// - 'forwards' pauses animation at last frame
+svg > g {
+    -ms-transform-origin:50% 50%;
+    transform-origin: 50% 50%;
+    -ms-transform:scale(0);
+    transform:scale(0);
+    animation : pictureScale .5s cubic-bezier(.25,.87,.44,1.23) forwards;
+}
+#speech {
+    animation-delay: 1.5s;
+    // .left, .right {
+    //     animation: floatX 12s ease-in-out infinite;
+    // }
+    // .right {
+    //     animation-delay : 2s;
+    //     animation-direction : reverse;
+    // }
+}
+#heart {
+    animation-delay: 1.75s;
+}
+#bear {
+    animation-delay: 2s;
+}
+#dove {
+    animation-delay: 2.25s;
+}
+
+
+
+
+
+
+
+
+
+
+// ___________________
+// overview
+
+
+
+
+// ___________________
+// stages-title
+.stages-title {
+    text-align : center;
+    display : flex;
+    justify-content : center;
+    // .container {
+    //     justify-content : center;
+    // }
+    h2 {
+        font-size : 4.5rem;
+        font-weight : $bold;
+        margin-bottom : 1rem;
+        color : white;
+        text-shadow : $text-shadow;
+    }
+} 
+
+
+
+
+// ___________________
+// 3: stages
+// div[class*=" stage-"] {
+//     color:red
+// }
+
