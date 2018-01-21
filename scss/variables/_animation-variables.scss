@@ -28,6 +28,11 @@
     to   { opacity: 1; }
 }
 
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
 @keyframes bounce {
     0%,
     100% {transform:translateY(-5px)}
@@ -35,49 +40,62 @@
 }
 
 
-// title scene
+
+
+
+
+
+
+// _____________________
+// title scene - not used
 // - pictures appearing
-@keyframes pictureScale {
-    from {
-        -ms-transform:scale(0);
-        transform:scale(0);
-    }
-    to {
-        -ms-transform:scale(1);
-        transform:scale(1);
-    }
-}
+// @keyframes pictureScale {
+//     from {
+//         -ms-transform:scale(0);
+//         transform:scale(0);
+//     }
+//     to {
+//         -ms-transform:scale(1);
+//         transform:scale(1);
+//     }
+// }
 // - picture elements
-@keyframes float {
-	0% {
-		transform: translatey(0px);
-	}
-	50% {
-		transform: translatey(-20px);
-	}
-	100% {
-		transform: translatey(0px);
-	}
+// @keyframes float {
+// 	0% {
+// 		transform: translatey(0px);
+// 	}
+// 	50% {
+// 		transform: translatey(-20px);
+// 	}
+// 	100% {
+// 		transform: translatey(0px);
+// 	}
+// }
+// @keyframes floatX {
+// 	0% {
+// 		transform: translatex(0px);
+// 	}
+// 	25% {
+// 		transform: translatex(-10px);
+// 	}
+// 	50% {
+// 		transform: translatex(0px);
+// 	}
+// }
+
+
+
+
+
+
+
+// _____________________
+// stage one / MIAMs
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
 }
-@keyframes floatX {
-	0% {
-		transform: translatex(0px);
-	}
-	25% {
-		transform: translatex(-10px);
-	}
-	50% {
-		transform: translatex(0px);
-	}
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -102,17 +120,32 @@ $white : #ffffff;
 $black : #000000;
 
 $black_a : rgba( $black, .15 );
+$white_a : rgba( $white, .5 );
 
 $orange : #f07f37;
 $blue : #7fc1ff;
 $red : #e74e42;
 
+// social icons
+$facebook : #3c5b9a;
+$twitter : #28aae1;
+$google : #dd4b39;
+$linkedin : #0077b5;
+
 
 // $able-green_half : lighten( $able-green, 50% );
 
-
+// text outline
 $text-shadow : -1px -1px 0 $black, 1px -1px 0 $black, -1px 1px 0 $black, 1px 1px 0 $black;
 
+
+// background colours and classes
+$bg_green : lighten( $able-green, 30% );
+$bg_grey : lighten( $able-grey, 45% );
+$bg_orange : lighten( $orange, 25% );
+
+// .bg-grey {background-color : $bg_grey;}
+// .bg-orange {background-color : $bg_orange;}
 
 
 
@@ -168,12 +201,7 @@ $red_light : lighten( $red, 10% );
 
 
 
-// - - - - - -
-// social icon colours
-$facebook : #3c5b9a;
-$twitter : #28aae1;
-$google : #dd4b39;
-$linkedin : #0077b5;
+
 
 
 

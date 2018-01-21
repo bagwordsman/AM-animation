@@ -6,7 +6,8 @@ body {
     line-height : 1.6;
     color : $able-grey;
     // @include verticalGradient($white, $able-green);
-    background-color : lighten( $able-green, 30% );
+    // background-color : lighten( $able-green, 30% );
+    background-color : $bg_green;
 
     // could just change bg colour with javascript, no luck with gradient and viewport - 100vh
 }
@@ -26,7 +27,7 @@ body {
     left : 0;
     right : 0;
     z-index : 5;
-    @include verticalGradient($black_a, transparent);
+    @include verticalGradient($white_a, transparent);
     .container {
         display : flex;
         justify-content : space-between; 
@@ -55,6 +56,16 @@ body {
                 color : $able-grey;
                 font-size : 1.8rem;
                 margin-left : 1.5rem;
+                transition : color .3s ease;
+                &.facebook:hover {
+                    color : $facebook;
+                }
+                &.google:hover {
+                    color : $google;
+                }
+                &.twitter:hover {
+                    color : $twitter;
+                }
             }
         }
         // fix flex - can't deal with after
@@ -88,7 +99,7 @@ body {
     > div {
         position : relative;
         width: 100%;
-        height: 100%;
+        // height: 100%; - this changes between sections
         overflow : hidden;
         box-sizing : border-box;
         // vertical align - requires flex on all containers
@@ -96,6 +107,10 @@ body {
         justify-content : center;
         // border-top:1px solid black;
         // border-bottom:1px solid black;
+
+        &.spacer {
+            height : 50%;
+        }
 
 
         // all containers
@@ -127,10 +142,21 @@ body {
             left : 0;
             z-index : 1;
         }
+        // may have to position each individually, and responsively
+        // - bank of england solution - tell people to make their devices landscape
         .right-graphic {
             height : 100%;
+            width : 60%;
             position : absolute;
-            right : -28%;
+            right : -5%;
+            z-index : 1;
+        }
+        .left-graphic {
+            height : 80%;
+            width : 80%;
+            position : absolute;
+            bottom : 0;
+            left : -15%;
             z-index : 1;
         }
     }
@@ -140,7 +166,11 @@ body {
 
 
 
-
+h3 {
+    font-size : 2.4rem;
+    font-weight : $bold;
+    margin-bottom : 1rem;
+}
 // paragraphs
 .paragraph {
     border-top : 10px solid;
@@ -169,6 +199,8 @@ body {
 
 
 
+
+
 // ____________________________________________________________________________
 
 // individual sections
@@ -176,6 +208,9 @@ body {
 
 // ___________________
 // 1: title
+.title {
+    height: 100%;
+}
 .title .container {
     display : flex;
     flex-direction : column;
@@ -198,11 +233,20 @@ body {
         padding : 1rem 2.5rem;
         background-color : rgba( $able-green, .75 );
     }
-    .fa {
-        font-size : 4.5rem;
-        color : $able-green;
+    .scroll-down {
         position : absolute;
-        bottom : 10%;
+        bottom : 5%;
+        display : flex;
+        flex-direction : column;
+        align-items : center;
+        span {
+            color : $able-grey;
+            margin-top : 1rem;
+        }
+    }
+    .fa {
+        color : $able-green;
+        font-size : 4.5rem;
         transform: translateY(0);
         animation: bounce 1.2s infinite;
         animation-timing-function: ease;
@@ -212,9 +256,13 @@ body {
 
 
 
+
+
 // add svg images - top level groups
 // - 'forwards' pauses animation at last frame
-svg > g {
+.title svg > g {
+    display : none; // hidden for the time being
+
     -ms-transform-origin:50% 50%;
     transform-origin: 50% 50%;
     -ms-transform:scale(0);
@@ -252,6 +300,35 @@ svg > g {
 
 // ___________________
 // overview
+.overview {
+    height: 100%;
+    display : flex;
+    justify-content : center;
+    // .container {
+    //     opacity : 0;
+    // }
+    // .paragraph {
+    //     opacity : 0;
+    //     transform : translatex(-500px);
+    // }
+    // svg {
+    //     opacity : 0;
+    // }
+
+
+    // div[class^='puzzle'], div[class*=' puzzle'] {
+    //     opacity : 0;
+    //     transform:scale(0);
+    // }
+    // svg > g {
+    //     opacity:0;
+    // }
+}
+// .overview .paragraph {transform:translatex(-200px);}
+
+
+
+
 
 
 
@@ -259,18 +336,19 @@ svg > g {
 // ___________________
 // stages-title
 .stages-title {
+    height : 100%;
     text-align : center;
     display : flex;
     justify-content : center;
-    // .container {
-    //     justify-content : center;
-    // }
+
     h2 {
-        font-size : 4.5rem;
-        font-weight : $bold;
-        margin-bottom : 1rem;
-        color : white;
-        text-shadow : $text-shadow;
+        font-size : 3rem;
+        font-weight : $normal;
+        padding : 1rem 2.5rem;
+        color : $white;
+        background-color : rgba( $able-grey, .75 );
+        // opacity: 0;
+        // transform: translatex(-500px);
     }
 } 
 
@@ -278,8 +356,23 @@ svg > g {
 
 
 // ___________________
-// 3: stages
-// div[class*=" stage-"] {
-//     color:red
-// }
+// stage one
+.stage-one {
+    height : 100%;
+    display : flex;
+    justify-content : center;
+
+    .tick {
+        stroke : transparent;
+        
+        // animation: dash .5s linear forwards;
+        &.active {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            stroke : $able-green;
+            animation: dash 3s linear forwards;
+
+        }
+    }
+} 
 
