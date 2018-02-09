@@ -2,18 +2,24 @@
 
 var titleH1 = animationSettings.headingH1,
      titleP = animationSettings.headingP,
+     smallP = animationSettings.smallMsg,
       overP = animationSettings.paraOverview,
        whyP = animationSettings.paraWhy,
    stagesH2 = animationSettings.headingStages,
   stageOneP = animationSettings.paraOne,
   stageTwoP = animationSettings.paraTwo,
-stageThreeP = animationSettings.paraThree;
+stageThreeP = animationSettings.paraThree,
+       ctaP = animationSettings.endCtaHeading,
+ ctaBtnText = animationSettings.endCtaLinkText,
+ ctaBtnLink = animationSettings.endCtaLink ;
+
 
          
          
 // add all the content
-$('.title h1').html(titleH1);
-$('.title p').html(titleP);
+$('.title .container > h1').html(titleH1);
+$('.title .container > p').html(titleP);
+$('.small-msg p').html(smallP);
 
 $('.overview p').html(overP);
 
@@ -22,6 +28,10 @@ $('.stages-title h2').html(stagesH2);
 $('.stage-one p').html(stageOneP);
 $('.stage-two p').html(stageTwoP);
 $('.stage-three p').html(stageThreeP);
+
+
+$('.end-cta p').html(ctaP);
+$('.end-cta a').html(ctaBtnText).attr('href', ctaBtnLink);
 
 
 
@@ -205,7 +215,7 @@ $(function() {
     // create a timeline to add tweens to
     var miamTween = new TimelineMax();
 
-    // heading 
+    // heading and content
     miamTween.fromTo(".stage-one .paragraph", 0.5, {
         opacity: 0,
         transform: "translatex(500px)"
@@ -254,6 +264,145 @@ $(function() {
 
 
 
+
+
+
+
+
+
+    // ___________
+    // Mediation Sessions
+    var mediationController = new ScrollMagic.Controller();
+
+    // create a timeline to add tweens to
+    var mediationTween = new TimelineMax();
+
+    // heading and content
+    mediationTween.fromTo(".stage-two .paragraph", 0.5, {
+        opacity: 0,
+        transform: "translatex(-500px)"
+    },
+    {
+        opacity: 1,
+        transform: "translatex(0px)", ease: Power2.easeOut
+    })
+
+    // - - - -
+    // graphic
+    
+    
+    // - - - - 
+    // body colour
+    .to("body", 1,  {
+        backgroundColor: "rgb(203, 230, 255)", ease: Power1.easeOut
+    }, 0) // add at a time of 0 seconds - i.e. at start trigger
+
+
+
+    // - - - -
+    // Create the Scene and trigger when visible
+    var mediationScene = new ScrollMagic.Scene({
+        triggerElement: '.stage-two',
+        duration: "600%", // How many pixels to scroll / animate
+        triggerHook: 0
+    })
+    .setTween(mediationTween)
+    .setPin(".stage-two") // adding ", {pushFollowers: false}" here makes the next html go through the pinned element
+    .addTo(mediationController);
+
+
+
+
+
+
+
+
+    // ___________
+    // Mediation End
+    var endController = new ScrollMagic.Controller();
+
+    // create a timeline to add tweens to
+    var endTween = new TimelineMax();
+
+    // heading and content
+    endTween.fromTo(".stage-three .paragraph", 0.5, {
+        opacity: 0,
+        transform: "translatex(500px)"
+    },
+    {
+        opacity: 1,
+        transform: "translatex(0px)", ease: Power2.easeOut
+    })
+
+    // - - - -
+    // graphic
+    
+    
+    // - - - - 
+    // body colour
+    .to("body", 1,  {
+        backgroundColor: "rgb(245, 184, 179)", ease: Power1.easeOut
+    }, 0) // add at a time of 0 seconds - i.e. at start trigger
+
+
+
+    // - - - -
+    // Create the Scene and trigger when visible
+    var endScene = new ScrollMagic.Scene({
+        triggerElement: '.stage-three',
+        duration: "600%", // How many pixels to scroll / animate
+        triggerHook: 0
+    })
+    .setTween(endTween)
+    .setPin(".stage-three") // adding ", {pushFollowers: false}" here makes the next html go through the pinned element
+    .addTo(endController);
+
+
+
+
+
+
+
+
+
+
+
+    // ___________
+    // CTA
+    var ctaController = new ScrollMagic.Controller();
+
+    // create a timeline to add tweens to
+    var ctaTween = new TimelineMax();
+
+    // heading and content
+    ctaTween.fromTo(".end-cta .container > div", 0.5, {
+        opacity: 0,
+        transform: "translatex(-500px)"
+    },
+    {
+        opacity: 1,
+        transform: "translatex(0px)", ease: Power2.easeOut
+    })
+
+    
+    // - - - - 
+    // body colour
+    .to("body", 1,  {
+        backgroundColor: "rgb(199, 230, 182)", ease: Power1.easeOut
+    }, 0) // add at a time of 0 seconds - i.e. at start trigger
+
+
+
+    // - - - -
+    // Create the Scene and trigger when visible
+    var ctaScene = new ScrollMagic.Scene({
+        triggerElement: '.end-cta',
+        duration: "150%", // How many pixels to scroll / animate
+        triggerHook: 0
+    })
+    .setTween(ctaTween)
+    .setPin(".end-cta") // adding ", {pushFollowers: false}" here makes the next html go through the pinned element
+    .addTo(ctaController);
 
 
 

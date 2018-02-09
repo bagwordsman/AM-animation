@@ -10,7 +10,26 @@ body {
     background-color : $bg_green;
 
     // could just change bg colour with javascript, no luck with gradient and viewport - 100vh
+    
+    // rotate message OR over 660px - see below
+    @media (orientation : portrait) , (max-width: 659px) {
+        position : fixed;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -87,6 +106,7 @@ body {
 
 
 // main animation container
+// - everything contained within this
 .animation {
     position: absolute;
     top: 0;
@@ -153,10 +173,10 @@ body {
         }
         .left-graphic {
             height : 80%;
-            width : 80%;
+            width : 100%; // 80
             position : absolute;
             bottom : 0;
-            left : -15%;
+            left : -25%; // -15
             z-index : 1;
         }
     }
@@ -171,6 +191,9 @@ h3 {
     font-weight : $bold;
     margin-bottom : 1rem;
 }
+
+
+
 // paragraphs
 .paragraph {
     border-top : 10px solid;
@@ -191,6 +214,25 @@ h3 {
 
 
 
+// scroll down arrow
+.scroll-down {
+    position : absolute;
+    bottom : 5%;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    span {
+        color : $able-grey;
+        margin-top : 1rem;
+    }
+    .fa {
+        color : $able-green;
+        font-size : 4.5rem;
+        transform: translateY(0);
+        animation: bounce 1.2s infinite;
+        animation-timing-function: ease;
+    }
+}
 
 
 
@@ -233,24 +275,52 @@ h3 {
         padding : 1rem 2.5rem;
         background-color : rgba( $able-green, .75 );
     }
-    .scroll-down {
-        position : absolute;
-        bottom : 5%;
-        display : flex;
-        flex-direction : column;
-        align-items : center;
-        span {
-            color : $able-grey;
-            margin-top : 1rem;
+    
+
+    // small screens
+    @media (orientation : portrait) , (max-width: 659px) {
+        > p, > h1, .scroll-down { display : none; }
+    }
+
+    // small screens
+    .small-msg {
+        display : none;
+        @media (orientation : portrait) , (max-width: 659px) {
+            display : flex;
+            flex-direction : column;
+            flex-wrap : wrap;
+            align-items : center;
+            justify-content : center;
+            p {
+                font-size : 1.8rem;
+                font-weight : $normal;
+                padding : 1rem 1.8rem;
+                color : $white;
+                background-color : rgba( $able-green, .75 );
+            }
+            .icon {
+                position : relative;
+                cursor : pointer;
+                &:hover {
+                    animation : rotate .75s ease-in-out forwards;
+                }
+            }
+            .fa {
+                color : $able-green;             
+                &-undo {
+                    position : absolute;
+                    top : 11rem;
+                    left : 3.5rem;
+                    font-size : 4.5rem;
+                }
+                &-mobile {
+                    font-size : 27rem;
+                }
+                
+            }
         }
     }
-    .fa {
-        color : $able-green;
-        font-size : 4.5rem;
-        transform: translateY(0);
-        animation: bounce 1.2s infinite;
-        animation-timing-function: ease;
-    }
+    
 }
 
 
@@ -356,7 +426,7 @@ h3 {
 
 
 // ___________________
-// stage one
+// stage one: MIAMs
 .stage-one {
     height : 100%;
     display : flex;
@@ -374,5 +444,90 @@ h3 {
 
         }
     }
+}
+
+
+
+
+
+// ___________________
+// stage two: Mediation Sessions
+.stage-two {
+    height : 100%;
+    display : flex;
+    justify-content : center;
+
+    
 } 
 
+
+
+
+
+// ___________________
+// stage three: End of Mediation
+.stage-three {
+    height : 100%;
+    display : flex;
+    justify-content : center;
+
+    
+}
+
+
+
+
+// ___________________
+// end CTA: link to able mediation website
+.end-cta {
+    height : 100%;
+    text-align : center;
+    display : flex;
+    justify-content : center;
+
+    .container > div {
+        display : flex;
+        flex-direction : column;
+
+    }
+
+    .scroll-down {
+        position : relative;
+        margin : 4.8rem 0;
+    }
+
+    p {
+        font-size : 2.4rem;
+        font-weight : $normal;
+        padding : .8rem 1.8rem;
+        color : $white;
+        background-color : rgba( $able-green, .75 );
+    }
+
+    .button {
+        align-self : center;
+        display: inline-block;
+        // height: 48px;
+        // padding: 0 10px;
+        // text-align: center;
+        padding: 1rem 2rem;
+        font-size: 3rem;
+        line-height: 1;
+        font-weight: $bold;
+        letter-spacing: .1rem;
+        text-decoration: none;
+        white-space: nowrap;
+        color: $orange;
+        background-color: transparent;
+        border: 3px solid $orange;
+        border-radius: 4px;
+        cursor: pointer;
+        box-sizing: border-box;
+        transition: all ease-in-out 0.25s;
+        &:hover,
+        &:focus {
+            color: $white;
+            background-color: $orange;
+        }
+    }
+} 

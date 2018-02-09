@@ -4070,6 +4070,11 @@ body .ui-tooltip {
     transform: translateY(-5px); }
   30% {
     transform: translateY(10px); } }
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(-90deg); } }
 @keyframes dash {
   to {
     stroke-dashoffset: 0; } }
@@ -4228,6 +4233,9 @@ body {
   line-height: 1.6;
   color: #6a6a6a;
   background-color: #c7e6b6; }
+  @media (orientation: portrait), (max-width: 659px) {
+    body {
+      position: fixed; } }
 
 .header {
   width: 100%;
@@ -4331,10 +4339,10 @@ body {
       z-index: 1; }
     .animation > div .left-graphic {
       height: 80%;
-      width: 80%;
+      width: 100%;
       position: absolute;
       bottom: 0;
-      left: -15%;
+      left: -25%;
       z-index: 1; }
 
 h3 {
@@ -4353,6 +4361,22 @@ h3 {
     border-top-color: #7fc1ff; }
   .stage-three .paragraph {
     border-top-color: #e74e42; }
+
+.scroll-down {
+  position: absolute;
+  bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .scroll-down span {
+    color: #6a6a6a;
+    margin-top: 1rem; }
+  .scroll-down .fa {
+    color: #70bf44;
+    font-size: 4.5rem;
+    transform: translateY(0);
+    animation: bounce 1.2s infinite;
+    animation-timing-function: ease; }
 
 .title {
   height: 100%; }
@@ -4377,21 +4401,38 @@ h3 {
     font-weight: 400;
     padding: 1rem 2.5rem;
     background-color: rgba(112, 191, 68, 0.75); }
-  .title .container .scroll-down {
-    position: absolute;
-    bottom: 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-    .title .container .scroll-down span {
-      color: #6a6a6a;
-      margin-top: 1rem; }
-  .title .container .fa {
-    color: #70bf44;
-    font-size: 4.5rem;
-    transform: translateY(0);
-    animation: bounce 1.2s infinite;
-    animation-timing-function: ease; }
+  @media (orientation: portrait), (max-width: 659px) {
+    .title .container > p, .title .container > h1, .title .container .scroll-down {
+      display: none; } }
+  .title .container .small-msg {
+    display: none; }
+    @media (orientation: portrait), (max-width: 659px) {
+      .title .container .small-msg {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center; }
+        .title .container .small-msg p {
+          font-size: 1.8rem;
+          font-weight: 400;
+          padding: 1rem 1.8rem;
+          color: #ffffff;
+          background-color: rgba(112, 191, 68, 0.75); }
+        .title .container .small-msg .icon {
+          position: relative;
+          cursor: pointer; }
+          .title .container .small-msg .icon:hover {
+            animation: rotate .75s ease-in-out forwards; }
+        .title .container .small-msg .fa {
+          color: #70bf44; }
+          .title .container .small-msg .fa-undo {
+            position: absolute;
+            top: 11rem;
+            left: 3.5rem;
+            font-size: 4.5rem; }
+          .title .container .small-msg .fa-mobile {
+            font-size: 27rem; } }
 
 .title svg > g {
   display: none;
@@ -4441,5 +4482,53 @@ h3 {
       stroke-dashoffset: 1000;
       stroke: #70bf44;
       animation: dash 3s linear forwards; }
+
+.stage-two {
+  height: 100%;
+  display: flex;
+  justify-content: center; }
+
+.stage-three {
+  height: 100%;
+  display: flex;
+  justify-content: center; }
+
+.end-cta {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center; }
+  .end-cta .container > div {
+    display: flex;
+    flex-direction: column; }
+  .end-cta .scroll-down {
+    position: relative;
+    margin: 4.8rem 0; }
+  .end-cta p {
+    font-size: 2.4rem;
+    font-weight: 400;
+    padding: .8rem 1.8rem;
+    color: #ffffff;
+    background-color: rgba(112, 191, 68, 0.75); }
+  .end-cta .button {
+    align-self: center;
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    color: #f07f37;
+    background-color: transparent;
+    border: 3px solid #f07f37;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all ease-in-out 0.25s; }
+    .end-cta .button:hover, .end-cta .button:focus {
+      color: #ffffff;
+      background-color: #f07f37; }
 
 /*# sourceMappingURL=animation.css.map */
