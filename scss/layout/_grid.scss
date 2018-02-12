@@ -21,7 +21,7 @@
 
 
   // For devices larger than 550px
-  @media (min-width: 550px) {
+  @media (min-width: 400px) {
     .container {
       width: 95%;
       padding: 0; }
@@ -31,7 +31,7 @@
 
 
   // For devices larger than 600px
-  @media (min-width: 600px) {
+  @media (min-width: 480px) {
     .container {
       width: 90%; }
     .column,

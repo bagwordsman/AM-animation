@@ -4106,11 +4106,11 @@ body .ui-tooltip {
   .columns.right {
     float: right; }
 
-@media (min-width: 550px) {
+@media (min-width: 400px) {
   .container {
     width: 95%;
     padding: 0; } }
-@media (min-width: 600px) {
+@media (min-width: 480px) {
   .container {
     width: 90%; }
 
@@ -4252,7 +4252,7 @@ body {
     body {
       font-size: 1.8rem;
       line-height: 1.6; } }
-  @media (orientation: portrait), (max-width: 599px) {
+  @media (orientation: portrait), (max-width: 480px) {
     body {
       position: fixed; } }
 
@@ -4453,12 +4453,12 @@ body {
       .title .container p {
         font-size: 3rem;
         padding: 1rem 2.5rem; } }
-  @media (orientation: portrait), (max-width: 599px) {
+  @media (orientation: portrait), (max-width: 480px) {
     .title .container > p, .title .container > h1, .title .container .scroll-down {
       display: none; } }
   .title .container .small-msg {
     display: none; }
-    @media (orientation: portrait), (max-width: 599px) {
+    @media (orientation: portrait), (max-width: 480px) {
       .title .container .small-msg {
         display: flex;
         flex-direction: column;

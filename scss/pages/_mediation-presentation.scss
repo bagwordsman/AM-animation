@@ -7,7 +7,7 @@ body {
     // could just change bg colour with javascript, no luck with gradient and viewport - 100vh
     
     // rotate message OR over 600px - see below
-    @media (orientation : portrait) , (max-width: 599px) {
+    @media (orientation : portrait) , (max-width: 480px) {
         position : fixed;
     }
 }
@@ -271,14 +271,14 @@ body {
     
 
     // small screens
-    @media (orientation : portrait) , (max-width: 599px) {
+    @media (orientation : portrait) , (max-width: 480px) {
         > p, > h1, .scroll-down { display : none; }
     }
 
     // small screens
     .small-msg {
         display : none;
-        @media (orientation : portrait) , (max-width: 599px) {
+        @media (orientation : portrait) , (max-width: 480px) {
             display : flex;
             flex-direction : column;
             flex-wrap : wrap;
