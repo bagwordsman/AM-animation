@@ -405,7 +405,7 @@ $(function() {
     // - - - -
     // add document
     endTween.fromTo(".stage-three svg", 0.25, {
-        transform: "translate(-500px, -500px)"
+        transform: "translate(-750px, -500px)"
     },
     {
         transform: "translate(0px)", ease: Power2.easeOut
