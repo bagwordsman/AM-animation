@@ -16,7 +16,7 @@ stageThreeP = animationSettings.paraThree,
 
 
          
-         
+// ____________________________  
 // add all the content
 $('.title .container > h1').html(titleH1);
 $('.title .container > p').html(titleP);
@@ -42,6 +42,7 @@ $('.end-cta a').html(ctaBtnText).attr('href', ctaBtnLink);
 
 // ____________________________
 // svg gradients
+// - signpost
 // - chrome bug causes gradient to not work on the pole
 // - workaround: https://stackoverflow.com/questions/10894377/dynamically-adding-a-svg-gradient
 createGradient($('.stage-two svg')[0],'PoleGradient',[
@@ -90,18 +91,50 @@ return defs.appendChild(grad);
 
 
 // ____________________________
-// do the animations
-// - can do some with pure css
+// header - scroll page to hide
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = $('.header').outerHeight();
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+    
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta)
+        return;
+    
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+        $('.header').removeClass('down').addClass('up');
+    } else {
+        // Scroll Up
+        if(st + $(window).height() < $(document).height()) {
+            $('.header').removeClass('up').addClass('down');
+        }
+    }
+    
+    lastScrollTop = st;
+}
 
 
-// titles
-// setTimeout(function(){
-//     $('#speech').addClass('active');
-// }, 2000);
 
-// setTimeout(function(){
-//     $('#house').addClass('active');
-// }, 2500);
+
+
+
 
 
 
@@ -109,47 +142,11 @@ return defs.appendChild(grad);
 
 
 // ____________________________
-// scrollmagic
+// scrollmagic animations
 
 // 1 - title
 $(function() {
-    
-    
-    
-    // ___________
-    // title
-    // - trying to get it to fadeout
 
-    // var titleController = new ScrollMagic.Controller();
-    
-    // var tween0 = TweenMax.to('.title', 0.5, {
-    //   opacity: '0'
-    // });
-    
-    // // Create the Scene and trigger when visible
-    // var scene0 = new ScrollMagic.Scene({
-    //   triggerElement: '.title h1',
-    //   duration: 200, // How many pixels to scroll / animate
-    //   triggerHook: 0
-    // })
-    // .setTween(tween0)
-    // .setPin(".title", {pushFollowers: false})
-    // .addTo(titleController);
-    
-    // // Add debug indicators fixed on right side
-    // scene0.addIndicators();
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     // ___________
     // overView

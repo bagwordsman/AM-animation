@@ -234,6 +234,8 @@ $space-s5 : 3rem;
 }
 
 // font sizing
+
+// - regular headings, no background
 @mixin h1($color){
     font-weight : $bold;
     margin-bottom : 1rem;
@@ -277,7 +279,7 @@ $space-s5 : 3rem;
 
 
 
-// headings with background colour
+// - headings with background colour
 @mixin h2Background($background-color){
     font-weight : $normal;
     font-size : 2rem;
@@ -298,11 +300,11 @@ $space-s5 : 3rem;
     font-weight : $normal;
     padding : .75rem 1.8rem;
     background-color : rgba( $background-color, .75 );
-    @media (min-width: 660px) {
-        font-size : 2.6rem;
-    }
+    // @media (min-width: 660px) {
+    //     font-size : 2.4rem;
+    // }
     @media (min-width: 880px) {
-        font-size : 3rem;
+        font-size : 2.6rem;
         padding : 1rem 2.5rem;
     }
 }

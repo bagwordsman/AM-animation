@@ -42,6 +42,12 @@ body {
     right : 0;
     z-index : 5;
     @include verticalGradient($white_a, transparent);
+    // hide on scroll
+    height : 110px;
+    transition: top 0.2s ease-in-out;
+    &.up {
+        top : -110px;
+    }
     .container {
         display : flex;
         justify-content : space-between; 
@@ -158,11 +164,18 @@ body {
         .left-graphic {
             position : absolute;
             z-index : 1;
-            height : 75%;
-            width : 75%;
-            top : 14%;
+            // height : 75%;
+            // width : 75%;
+            // top : 14%;
+            // bottom : 0;
+            // left : -12%;
+
+            width : 100%;
+            height : 100%;
+            top : 0;
             bottom : 0;
-            left : -12%;
+            left : -30%;
+
             @media (min-width: 660px) {
                 height : 87.5%;
                 width : 87.5%;
@@ -477,11 +490,19 @@ body {
 
     .scroll-down {
         position : relative;
-        margin : 4.8rem 0;
+        display : none;
+        @media (min-width: 660px) {
+            display : block;
+            margin : 2.4rem 0;
+        }
+        @media (min-width: 880px) {
+            margin : 4.8rem 0;
+        }
     }
 
     p {
         @include pBackground($able-green);
+        margin-bottom : 1rem;
     }
 
     .button {
