@@ -4078,6 +4078,17 @@ body .ui-tooltip {
 @keyframes dash {
   to {
     stroke-dashoffset: 0; } }
+@keyframes opaque {
+  to {
+    opacity: 1; } }
+@keyframes blur {
+  from {
+    filter: url("#blur");
+    transform: translate(-1px, -2px); }
+  to {
+    filter: none;
+    transform: translate(0px);
+    fill: #e74e42; } }
 .container {
   position: relative;
   width: 100%;
@@ -4099,7 +4110,7 @@ body .ui-tooltip {
   .container {
     width: 95%;
     padding: 0; } }
-@media (min-width: 660px) {
+@media (min-width: 600px) {
   .container {
     width: 90%; }
 
@@ -4229,11 +4240,19 @@ body {
   width: 100%;
   height: 100%;
   font-family: "Asap", Helvetica, Arial, sans-serif;
-  font-size: 1.8rem;
-  line-height: 1.6;
+  font-size: 1.5rem;
+  line-height: 1.5;
   color: #6a6a6a;
   background-color: #c7e6b6; }
-  @media (orientation: portrait), (max-width: 659px) {
+  @media (min-width: 660px) {
+    body {
+      font-size: 1.65rem;
+      line-height: 1.55; } }
+  @media (min-width: 880px) {
+    body {
+      font-size: 1.8rem;
+      line-height: 1.6; } }
+  @media (orientation: portrait), (max-width: 599px) {
     body {
       position: fixed; } }
 
@@ -4258,7 +4277,7 @@ body {
   /* IE10+ */
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, transparent 100%);
   /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 );
   /* IE6-9 */ }
   .header .container {
     display: flex;
@@ -4311,8 +4330,6 @@ body {
     box-sizing: border-box;
     display: flex;
     justify-content: center; }
-    .animation > div.spacer {
-      height: 50%; }
     .animation > div .container {
       z-index: 2;
       display: flex;
@@ -4338,21 +4355,42 @@ body {
       right: -5%;
       z-index: 1; }
     .animation > div .left-graphic {
-      height: 80%;
-      width: 100%;
       position: absolute;
+      z-index: 1;
+      height: 75%;
+      width: 75%;
+      top: 14%;
       bottom: 0;
-      left: -25%;
-      z-index: 1; }
-
-h3 {
-  font-size: 2.4rem;
-  font-weight: 700;
-  margin-bottom: 1rem; }
+      left: -12%; }
+      @media (min-width: 660px) {
+        .animation > div .left-graphic {
+          height: 87.5%;
+          width: 87.5%;
+          top: 7%;
+          left: -18%; } }
+      @media (min-width: 880px) {
+        .animation > div .left-graphic {
+          height: 100%;
+          width: 100%;
+          top: 0;
+          left: -24%; }
+          .animation > div .left-graphic.document {
+            top: 6%; } }
 
 .paragraph {
   border-top: 10px solid;
   padding-top: 2.5rem; }
+  .paragraph h3 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #6a6a6a; }
+    @media (min-width: 660px) {
+      .paragraph h3 {
+        font-size: 2.1rem; } }
+    @media (min-width: 880px) {
+      .paragraph h3 {
+        font-size: 2.4rem; } }
   .overview .paragraph {
     border-top-color: #70bf44; }
   .stage-one .paragraph {
@@ -4392,21 +4430,35 @@ h3 {
   color: #ffffff;
   animation: fadein 2s; }
   .title .container h1 {
-    font-size: 6rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000; }
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+    color: #ffffff;
+    font-size: 4.5rem; }
+    @media (min-width: 660px) {
+      .title .container h1 {
+        font-size: 5.25rem; } }
+    @media (min-width: 880px) {
+      .title .container h1 {
+        font-size: 6rem; } }
   .title .container p {
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-weight: 400;
-    padding: 1rem 2.5rem;
+    padding: .75rem 1.8rem;
     background-color: rgba(112, 191, 68, 0.75); }
-  @media (orientation: portrait), (max-width: 659px) {
+    @media (min-width: 660px) {
+      .title .container p {
+        font-size: 2.6rem; } }
+    @media (min-width: 880px) {
+      .title .container p {
+        font-size: 3rem;
+        padding: 1rem 2.5rem; } }
+  @media (orientation: portrait), (max-width: 599px) {
     .title .container > p, .title .container > h1, .title .container .scroll-down {
       display: none; } }
   .title .container .small-msg {
     display: none; }
-    @media (orientation: portrait), (max-width: 659px) {
+    @media (orientation: portrait), (max-width: 599px) {
       .title .container .small-msg {
         display: flex;
         flex-direction: column;
@@ -4421,7 +4473,8 @@ h3 {
           background-color: rgba(112, 191, 68, 0.75); }
         .title .container .small-msg .icon {
           position: relative;
-          cursor: pointer; }
+          cursor: pointer;
+          width: 27rem; }
           .title .container .small-msg .icon:hover {
             animation: rotate .75s ease-in-out forwards; }
         .title .container .small-msg .fa {
@@ -4429,30 +4482,10 @@ h3 {
           .title .container .small-msg .fa-undo {
             position: absolute;
             top: 11rem;
-            left: 3.5rem;
+            left: calc((27rem/2) - 2.25rem);
             font-size: 4.5rem; }
           .title .container .small-msg .fa-mobile {
             font-size: 27rem; } }
-
-.title svg > g {
-  display: none;
-  -ms-transform-origin: 50% 50%;
-  transform-origin: 50% 50%;
-  -ms-transform: scale(0);
-  transform: scale(0);
-  animation: pictureScale 0.5s cubic-bezier(0.25, 0.87, 0.44, 1.23) forwards; }
-
-#speech {
-  animation-delay: 1.5s; }
-
-#heart {
-  animation-delay: 1.75s; }
-
-#bear {
-  animation-delay: 2s; }
-
-#dove {
-  animation-delay: 2.25s; }
 
 .overview {
   height: 100%;
@@ -4465,18 +4498,26 @@ h3 {
   display: flex;
   justify-content: center; }
   .stages-title h2 {
-    font-size: 3rem;
     font-weight: 400;
-    padding: 1rem 2.5rem;
+    font-size: 2rem;
+    padding: .75rem 1.8rem;
     color: #ffffff;
     background-color: rgba(106, 106, 106, 0.75); }
+    @media (min-width: 660px) {
+      .stages-title h2 {
+        font-size: 2.4rem; } }
+    @media (min-width: 880px) {
+      .stages-title h2 {
+        font-size: 3rem;
+        padding: 1rem 2.5rem; } }
 
 .stage-one {
   height: 100%;
   display: flex;
   justify-content: center; }
   .stage-one .tick {
-    stroke: transparent; }
+    stroke: transparent;
+    stroke-width: 20; }
     .stage-one .tick.active {
       stroke-dasharray: 1000;
       stroke-dashoffset: 1000;
@@ -4487,11 +4528,36 @@ h3 {
   height: 100%;
   display: flex;
   justify-content: center; }
+  .stage-two .right-graphic.signpost {
+    width: 50%;
+    top: 5%;
+    right: 1%; }
+  .stage-two .one, .stage-two .two, .stage-two .three {
+    opacity: 0; }
+  .stage-two .opaque {
+    animation: opaque 1s linear forwards; }
 
 .stage-three {
   height: 100%;
   display: flex;
   justify-content: center; }
+  .stage-three .signature {
+    stroke: transparent; }
+    .stage-three .signature path {
+      stroke-width: 5; }
+    .stage-three .signature line {
+      stroke-width: 7; }
+    .stage-three .signature.active path, .stage-three .signature.active line {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      stroke: #6a6a6a;
+      animation: dash 3s linear forwards; }
+    .stage-three .signature.active path {
+      stroke: #3c5b9a; }
+  .stage-three .stamp {
+    fill: transparent; }
+    .stage-three .stamp.active path {
+      animation: blur .35s linear forwards; }
 
 .end-cta {
   height: 100%;
@@ -4500,16 +4566,36 @@ h3 {
   justify-content: center; }
   .end-cta .container > div {
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    color: #ffffff; }
+  .end-cta h2 {
+    align-self: center;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+    color: #ffffff;
+    font-size: 4.5rem; }
+    @media (min-width: 660px) {
+      .end-cta h2 {
+        font-size: 5.25rem; } }
+    @media (min-width: 880px) {
+      .end-cta h2 {
+        font-size: 6rem; } }
   .end-cta .scroll-down {
     position: relative;
     margin: 4.8rem 0; }
   .end-cta p {
     font-size: 2.4rem;
     font-weight: 400;
-    padding: .8rem 1.8rem;
-    color: #ffffff;
+    padding: .75rem 1.8rem;
     background-color: rgba(112, 191, 68, 0.75); }
+    @media (min-width: 660px) {
+      .end-cta p {
+        font-size: 2.6rem; } }
+    @media (min-width: 880px) {
+      .end-cta p {
+        font-size: 3rem;
+        padding: 1rem 2.5rem; } }
   .end-cta .button {
     align-self: center;
     display: inline-block;

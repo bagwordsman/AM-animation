@@ -6,107 +6,6 @@
 
 
 
-// mixins
-@mixin verticalGradient($top, $bottom){
-    background: $top; /* Old browsers */
-    background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
-}
-
-
-
-
-
-// animations
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-@keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-}
-
-@keyframes bounce {
-    0%,
-    100% { transform:translateY(-5px); }
-    30% { transform:translateY(10px); }
-}
-
-@keyframes rotate {
-    from { transform:rotate(0deg); }
-    to { transform:rotate(-90deg); }
-}
-
-
-
-
-
-
-
-
-// _____________________
-// title scene - not used
-// - pictures appearing
-// @keyframes pictureScale {
-//     from {
-//         -ms-transform:scale(0);
-//         transform:scale(0);
-//     }
-//     to {
-//         -ms-transform:scale(1);
-//         transform:scale(1);
-//     }
-// }
-// - picture elements
-// @keyframes float {
-// 	0% {
-// 		transform: translatey(0px);
-// 	}
-// 	50% {
-// 		transform: translatey(-20px);
-// 	}
-// 	100% {
-// 		transform: translatey(0px);
-// 	}
-// }
-// @keyframes floatX {
-// 	0% {
-// 		transform: translatex(0px);
-// 	}
-// 	25% {
-// 		transform: translatex(-10px);
-// 	}
-// 	50% {
-// 		transform: translatex(0px);
-// 	}
-// }
-
-
-
-
-
-
-
-// _____________________
-// stage one / MIAMs
-@keyframes dash {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-
-
-
-
-
 
 
 
@@ -119,8 +18,8 @@
 // variables
 
 // able colours
-$able-green : #70bf44; // - bg: 199, 230, 182
-$able-grey : #6a6a6a;
+$able-green : #70bf44; // 112, 191, 68   - bg: 199, 230, 182
+$able-grey : #6a6a6a; // 106, 106, 106
 $white : #ffffff;
 $black : #000000;
 
@@ -169,7 +68,7 @@ $bg_orange : lighten( $orange, 25% );
 
 // greys
 $able-darkergrey : #545454; // from single posts nav
-$able-darkgrey : #b3b3b3; // from footer
+$able-darkgrey : #b3b3b3; // from footer // 179, 179, 179
 $able-middarkgrey : #c0c0c0; // from single posts nav
 $able-midgrey : #dbdbdb; // from nav
 $able-lightgrey : #f0f0f0;
@@ -206,6 +105,59 @@ $red_light : lighten( $red, 10% );
 
 
 
+
+
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+// animations
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes bounce {
+    0%,
+    100% { transform:translateY(-5px); }
+    30% { transform:translateY(10px); }
+}
+
+@keyframes rotate {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(-90deg); }
+}
+
+// stage one / MIAMs
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+// stage two / Mediation sessions
+@keyframes opaque {
+    to {
+        opacity: 1;
+    }
+}
+
+// stage three / end of Mediation
+@keyframes blur {
+    from {
+        // -webkit-filter : blur(5px);
+        filter : url("#blur");
+        transform:translate(-1px, -2px);
+    }
+    to {
+        // -webkit-filter : blur(0px);
+        filter : none;
+        transform:translate(0px);
+        fill : $red;
+    }
+}
 
 
 
@@ -267,23 +219,93 @@ $space-s5 : 3rem;
 
 
 //––––––––––––––––––––––––––––––––––––––––––––––––––
-// make sure variable names correspond to different breakpoints - i.e. 90% was the width at 660px
-// grid and dimensions
-$container-width_xxs : 95%;
-$container-width_xs : 90%;
-$container-width_xl : 1160px;
+// mixins
+
+// gradient
+@mixin verticalGradient($top, $bottom){
+    background: $top; /* Old browsers */
+    background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 ); /* IE6-9 */
+}
+
+// font sizing
+@mixin h1($color){
+    font-weight : $bold;
+    margin-bottom : 1rem;
+    text-shadow : $text-shadow;
+    color : $color;
+    font-size : 4.5rem;
+    @media (min-width: 660px) {
+        font-size : 5.25rem;
+    }
+    @media (min-width: 880px) {
+        font-size : 6rem;
+    }
+}
+
+@mixin h3($color){
+    font-weight : $bold;
+    margin-bottom : 1rem;
+    font-size : 1.8rem;
+    color : $color;
+    @media (min-width: 660px) {
+        font-size : 2.1rem;
+    }
+    @media (min-width: 880px) {
+        font-size : 2.4rem;
+    }
+}
+
+@mixin Pbody($color){
+    font-size : 1.5rem;
+    line-height : 1.5;
+    color : $color;
+    @media (min-width: 660px) {
+        font-size : 1.65rem;
+        line-height : 1.55;
+    }
+    @media (min-width: 880px) {
+        font-size : 1.8rem;
+        line-height : 1.6;
+    }
+}
 
 
-// breakpoints
-$break-xxs : 550px;
-$break-xs : 660px;
-$break-s : 768px;
-$break-m : 860px;
-$break-l : 980px;
-$break-xl : 1160px;
-$break-xxl : 1200px;
-$break-xxxl : 1800px;
 
+// headings with background colour
+@mixin h2Background($background-color){
+    font-weight : $normal;
+    font-size : 2rem;
+    padding : .75rem 1.8rem;
+    color : $white;
+    background-color : rgba( $background-color, .75 );
+    @media (min-width: 660px) {
+        font-size : 2.4rem;
+    }
+    @media (min-width: 880px) {
+        font-size : 3rem;
+        padding : 1rem 2.5rem;
+    }
+}
+
+@mixin pBackground($background-color){
+    font-size : 2.4rem;
+    font-weight : $normal;
+    padding : .75rem 1.8rem;
+    background-color : rgba( $background-color, .75 );
+    @media (min-width: 660px) {
+        font-size : 2.6rem;
+    }
+    @media (min-width: 880px) {
+        font-size : 3rem;
+        padding : 1rem 2.5rem;
+    }
+}
 
 
 
@@ -306,6 +328,7 @@ $shadow-down-right_thick : 2px 2px 3px rgba(0, 0, 0, 0.5);
 
 // gradients
 $vertical-green : linear-gradient(180deg, $white 0%, $able-green 100%) repeat scroll 0 0;
+$vertical-grey_to-zero : linear-gradient(180deg, $able-middarkgrey 0%, $able-middarkgrey 75%, rgba($able-middarkgrey, 0) 100%) repeat scroll 0 0;
 $fade-in-out-center_horizontal : linear-gradient(to right, $able-lightgrey, $able-grey 35%, $able-grey 65%, $able-lightgrey 100%) 1 1 1 1;
 $fade-in-out-center_vertical : linear-gradient(to top, $able-lightgrey, $able-grey 35%, $able-grey 65%, $able-lightgrey 100%) 1 1 1 1;
 

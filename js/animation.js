@@ -9,7 +9,8 @@ var titleH1 = animationSettings.headingH1,
   stageOneP = animationSettings.paraOne,
   stageTwoP = animationSettings.paraTwo,
 stageThreeP = animationSettings.paraThree,
-       ctaP = animationSettings.endCtaHeading,
+      ctaH2 = animationSettings.endCtaHeading,
+       ctaP = animationSettings.endCtaText,
  ctaBtnText = animationSettings.endCtaLinkText,
  ctaBtnLink = animationSettings.endCtaLink ;
 
@@ -29,9 +30,60 @@ $('.stage-one p').html(stageOneP);
 $('.stage-two p').html(stageTwoP);
 $('.stage-three p').html(stageThreeP);
 
-
+// cta
+$('.end-cta h2').html(ctaH2);
 $('.end-cta p').html(ctaP);
 $('.end-cta a').html(ctaBtnText).attr('href', ctaBtnLink);
+
+
+
+
+
+
+// ____________________________
+// svg gradients
+// - chrome bug causes gradient to not work on the pole
+// - workaround: https://stackoverflow.com/questions/10894377/dynamically-adding-a-svg-gradient
+createGradient($('.stage-two svg')[0],'PoleGradient',[
+    // add colour stops here
+    {offset:'0', 'stop-color':'#c0c0c0', 'stop-opacity':1},
+    {offset:'100%','stop-color':'#c0c0c0', 'stop-opacity':0}
+]);
+
+$('.stage-two svg path.pole').attr({
+    fill : 'url(#PoleGradient)'
+});
+
+// this makes the gradient vertical for svg:
+// x1="0" x2="0" y1="0" y2="1"
+
+
+// svg:   the owning <svg> element
+// id:    an id="..." attribute for the gradient
+// stops: an array of objects with <stop> attributes
+function createGradient(svg,id,stops){
+var svgNS = svg.namespaceURI;
+var grad  = document.createElementNS(svgNS,'linearGradient');
+grad.setAttribute('id',id);
+// make gradient vertical:
+grad.setAttribute('x1',0);
+grad.setAttribute('x2',0);
+grad.setAttribute('y1',0);
+grad.setAttribute('y2',1);
+// add colour stops:
+for (var i=0;i<stops.length;i++){
+    var attrs = stops[i];
+    var stop = document.createElementNS(svgNS,'stop');
+    for (var attr in attrs){
+    if (attrs.hasOwnProperty(attr)) stop.setAttribute(attr,attrs[attr]);
+    }
+    grad.appendChild(stop);
+}
+
+var defs = svg.querySelector('defs') ||
+    svg.insertBefore( document.createElementNS(svgNS,'defs'), svg.firstChild);
+return defs.appendChild(grad);
+}
 
 
 
@@ -227,7 +279,7 @@ $(function() {
 
     // - - - - 
     // add clipboard
-    miamTween.fromTo(".stage-one svg", 0.5, {
+    miamTween.fromTo(".stage-one svg", 0.25, {
         transform: "translate(-500px, 500px)"
     },
     {
@@ -236,18 +288,19 @@ $(function() {
 
     // add ticks
     // - active getting added to first item immediately, adding delay causes fadein
-    // - empty item hack added
-    miamTween.staggerTo(["", ".stage-one .tick.one", ".stage-one .tick.two", ".stage-one .tick.three"], 0, 
-    {
+    // - empty item hack(s) added
+    miamTween.staggerTo(["", ".stage-one .tick.one", ".stage-one .tick.two", ".stage-one .tick.three", "", ""], 0, {
         className:"+=active"
     }, 0.35)
-    
-    
+
     // - - - - 
     // body colour
     .to("body", 1,  {
         backgroundColor: "rgb(249, 203, 174)", ease: Power1.easeOut
     }, 0) // add at a time of 0 seconds - i.e. at start trigger
+
+    // miamTween.shiftChildren(-1)
+    // console.log(miamTween);
 
 
     // Create the Scene and trigger when visible
@@ -270,6 +323,8 @@ $(function() {
 
 
 
+    
+    
     // ___________
     // Mediation Sessions
     var mediationController = new ScrollMagic.Controller();
@@ -287,8 +342,22 @@ $(function() {
         transform: "translatex(0px)", ease: Power2.easeOut
     })
 
+    
     // - - - -
-    // graphic
+    // add signpost
+    mediationTween.fromTo(".stage-two svg", 0.25, {
+        transform: "translate(0, 600px)"
+    },
+    {
+        transform: "translate(0px)", ease: Power2.easeOut
+    }, 2)
+
+    // reveal signs - fade in
+    // - empty item hack(s) added - as above
+    mediationTween.staggerTo(["", ".stage-two .one", ".stage-two .two", ".stage-two .three", "", ""], 0, {
+        className:"+=opaque"
+    }, 1)
+    
     
     
     // - - - - 
@@ -317,6 +386,8 @@ $(function() {
 
 
 
+    
+    
     // ___________
     // Mediation End
     var endController = new ScrollMagic.Controller();
@@ -335,7 +406,18 @@ $(function() {
     })
 
     // - - - -
-    // graphic
+    // add document
+    endTween.fromTo(".stage-three svg", 0.25, {
+        transform: "translate(-500px, -500px)"
+    },
+    {
+        transform: "translate(0px)", ease: Power2.easeOut
+    }, 0.5)
+
+    // add signatures
+    endTween.staggerTo(["", ".stage-three .signature.one", ".stage-three .signature.two", ".stage-three .stamp.three", "", ""], 0, {
+        className:"+=active"
+    }, 0.35)
     
     
     // - - - - 

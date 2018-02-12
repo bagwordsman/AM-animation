@@ -2,17 +2,12 @@ body {
     width : 100%;
     height : 100%;
     font-family : $font-main;
-    font-size : 1.8rem;
-    line-height : 1.6;
-    color : $able-grey;
-    // @include verticalGradient($white, $able-green);
-    // background-color : lighten( $able-green, 30% );
+    @include Pbody($able-grey);
     background-color : $bg_green;
-
     // could just change bg colour with javascript, no luck with gradient and viewport - 100vh
     
-    // rotate message OR over 660px - see below
-    @media (orientation : portrait) , (max-width: 659px) {
+    // rotate message OR over 600px - see below
+    @media (orientation : portrait) , (max-width: 599px) {
         position : fixed;
     }
 }
@@ -113,27 +108,16 @@ body {
     left: 0;
     width: 100%;
     margin: auto;
-    bottom : 0; // -added
-    // overflow: hidden; -taken away
-    // sections
+    bottom : 0;
     > div {
         position : relative;
         width: 100%;
-        // height: 100%; - this changes between sections
         overflow : hidden;
         box-sizing : border-box;
-        // vertical align - requires flex on all containers
         display : flex;
         justify-content : center;
-        // border-top:1px solid black;
-        // border-bottom:1px solid black;
 
-        &.spacer {
-            height : 50%;
-        }
-
-
-        // all containers
+        // all containers (apart from header)
         .container {
             z-index : 2;
             display : flex;
@@ -163,7 +147,6 @@ body {
             z-index : 1;
         }
         // may have to position each individually, and responsively
-        // - bank of england solution - tell people to make their devices landscape
         .right-graphic {
             height : 100%;
             width : 60%;
@@ -171,13 +154,30 @@ body {
             right : -5%;
             z-index : 1;
         }
+        
         .left-graphic {
-            height : 80%;
-            width : 100%; // 80
             position : absolute;
-            bottom : 0;
-            left : -25%; // -15
             z-index : 1;
+            height : 75%;
+            width : 75%;
+            top : 14%;
+            bottom : 0;
+            left : -12%;
+            @media (min-width: 660px) {
+                height : 87.5%;
+                width : 87.5%;
+                top : 7%;
+                left : -18%;
+            }
+            @media (min-width: 880px) {
+                height : 100%;
+                width : 100%;
+                top : 0;
+                left : -24%;
+                &.document {
+                    top : 6%;
+                }
+            }
         }
     }
 }
@@ -186,11 +186,7 @@ body {
 
 
 
-h3 {
-    font-size : 2.4rem;
-    font-weight : $bold;
-    margin-bottom : 1rem;
-}
+
 
 
 
@@ -198,6 +194,9 @@ h3 {
 .paragraph {
     border-top : 10px solid;
     padding-top : 2.5rem;
+    h3 {
+        @include h3($able-grey);
+    }
     .overview & {
         border-top-color : $able-green;
     }
@@ -264,28 +263,22 @@ h3 {
     color : $white;
     animation: fadein 2s;
     h1 {
-        font-size : 6rem;
-        font-weight : $bold;
-        margin-bottom : 1rem;
-        text-shadow : $text-shadow;
+        @include h1($white);
     }
     p {
-        font-size : 3rem;
-        font-weight : $normal;
-        padding : 1rem 2.5rem;
-        background-color : rgba( $able-green, .75 );
+        @include pBackground($able-green);
     }
     
 
     // small screens
-    @media (orientation : portrait) , (max-width: 659px) {
+    @media (orientation : portrait) , (max-width: 599px) {
         > p, > h1, .scroll-down { display : none; }
     }
 
     // small screens
     .small-msg {
         display : none;
-        @media (orientation : portrait) , (max-width: 659px) {
+        @media (orientation : portrait) , (max-width: 599px) {
             display : flex;
             flex-direction : column;
             flex-wrap : wrap;
@@ -301,6 +294,7 @@ h3 {
             .icon {
                 position : relative;
                 cursor : pointer;
+                width : 27rem;
                 &:hover {
                     animation : rotate .75s ease-in-out forwards;
                 }
@@ -310,7 +304,7 @@ h3 {
                 &-undo {
                     position : absolute;
                     top : 11rem;
-                    left : 3.5rem;
+                    left : calc((27rem/2) - 2.25rem);
                     font-size : 4.5rem;
                 }
                 &-mobile {
@@ -328,76 +322,13 @@ h3 {
 
 
 
-// add svg images - top level groups
-// - 'forwards' pauses animation at last frame
-.title svg > g {
-    display : none; // hidden for the time being
-
-    -ms-transform-origin:50% 50%;
-    transform-origin: 50% 50%;
-    -ms-transform:scale(0);
-    transform:scale(0);
-    animation : pictureScale .5s cubic-bezier(.25,.87,.44,1.23) forwards;
-}
-#speech {
-    animation-delay: 1.5s;
-    // .left, .right {
-    //     animation: floatX 12s ease-in-out infinite;
-    // }
-    // .right {
-    //     animation-delay : 2s;
-    //     animation-direction : reverse;
-    // }
-}
-#heart {
-    animation-delay: 1.75s;
-}
-#bear {
-    animation-delay: 2s;
-}
-#dove {
-    animation-delay: 2.25s;
-}
-
-
-
-
-
-
-
-
-
-
 // ___________________
 // overview
 .overview {
     height: 100%;
     display : flex;
     justify-content : center;
-    // .container {
-    //     opacity : 0;
-    // }
-    // .paragraph {
-    //     opacity : 0;
-    //     transform : translatex(-500px);
-    // }
-    // svg {
-    //     opacity : 0;
-    // }
-
-
-    // div[class^='puzzle'], div[class*=' puzzle'] {
-    //     opacity : 0;
-    //     transform:scale(0);
-    // }
-    // svg > g {
-    //     opacity:0;
-    // }
 }
-// .overview .paragraph {transform:translatex(-200px);}
-
-
-
 
 
 
@@ -412,13 +343,7 @@ h3 {
     justify-content : center;
 
     h2 {
-        font-size : 3rem;
-        font-weight : $normal;
-        padding : 1rem 2.5rem;
-        color : $white;
-        background-color : rgba( $able-grey, .75 );
-        // opacity: 0;
-        // transform: translatex(-500px);
+        @include h2Background($able-grey);
     }
 } 
 
@@ -434,6 +359,7 @@ h3 {
 
     .tick {
         stroke : transparent;
+        stroke-width : 20;
         
         // animation: dash .5s linear forwards;
         &.active {
@@ -457,7 +383,19 @@ h3 {
     display : flex;
     justify-content : center;
 
-    
+    // signpost
+    .right-graphic.signpost {
+        width : 50%;
+        top : 5%;
+        right : 1%;
+    }
+
+    .one, .two, .three {
+        opacity : 0;
+    }
+    .opaque {
+        animation: opaque 1s linear forwards;
+    }
 } 
 
 
@@ -471,8 +409,49 @@ h3 {
     display : flex;
     justify-content : center;
 
+    // signatures
+    .signature {
+        stroke : transparent;
+        path {
+            stroke-width : 5;
+        }
+        line {
+            stroke-width : 7;
+        }
+        
+        // animation: dash .5s linear forwards;
+        &.active path,
+        &.active line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            stroke : $able-grey;
+            animation: dash 3s linear forwards;
+        }
+        &.active path {
+            stroke : $facebook;
+        }
+    }
+    // stamp
+    .stamp {
+        fill : transparent;
+        &.active path {
+            animation: blur .35s linear forwards;
+        }
+    }
+
     
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -488,7 +467,12 @@ h3 {
     .container > div {
         display : flex;
         flex-direction : column;
+        color : $white;
+    }
 
+    h2 {
+        align-self : center;
+        @include h1($white);
     }
 
     .scroll-down {
@@ -497,19 +481,12 @@ h3 {
     }
 
     p {
-        font-size : 2.4rem;
-        font-weight : $normal;
-        padding : .8rem 1.8rem;
-        color : $white;
-        background-color : rgba( $able-green, .75 );
+        @include pBackground($able-green);
     }
 
     .button {
         align-self : center;
         display: inline-block;
-        // height: 48px;
-        // padding: 0 10px;
-        // text-align: center;
         padding: 1rem 2rem;
         font-size: 3rem;
         line-height: 1;
