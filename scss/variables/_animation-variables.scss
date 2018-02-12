@@ -296,13 +296,13 @@ $space-s5 : 3rem;
 }
 
 @mixin pBackground($background-color){
-    font-size : 2.4rem;
+    font-size : 1.8rem;
     font-weight : $normal;
     padding : .75rem 1.8rem;
     background-color : rgba( $background-color, .75 );
-    // @media (min-width: 660px) {
-    //     font-size : 2.4rem;
-    // }
+    @media (min-width: 660px) {
+        font-size : 2.2rem;
+    }
     @media (min-width: 880px) {
         font-size : 2.6rem;
         padding : 1rem 2.5rem;

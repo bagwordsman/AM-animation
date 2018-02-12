@@ -30,7 +30,7 @@ var animationSettings = (function() {
             // end call to action
             
             endCtaHeading : 'Want to find out more?',
-            endCtaText : 'Contact Able Mediation for a free 20 minute telephone consultation',
+            endCtaText : 'Contact us for a free 20 minute telephone consultation',
             endCtaLinkText : 'Speak to a Family Mediator now',
             endCtaLink : 'https://www.ablemediation.com/contact/'
 

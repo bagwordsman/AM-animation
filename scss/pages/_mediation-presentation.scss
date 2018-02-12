@@ -22,17 +22,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // brand header
 .header {
     width : 100%;
@@ -206,7 +195,10 @@ body {
 // paragraphs
 .paragraph {
     border-top : 10px solid;
-    padding-top : 2.5rem;
+    padding-top : 1.5rem;
+    @media (min-width: 660px) {
+        padding-top : 2.5rem;
+    }
     h3 {
         @include h3($able-grey);
     }
@@ -502,7 +494,7 @@ body {
 
     p {
         @include pBackground($able-green);
-        margin-bottom : 1rem;
+        margin-bottom : 2.4rem;
     }
 
     .button {
