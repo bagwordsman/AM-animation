@@ -4,13 +4,6 @@ body {
     width : 100%;
     height : 100%;
     background-color : var(--bg_green);
-    // background-color : $bg_green;
-
-    // fonts etc. defined in _base.scss  
-    // rotate message OR over 600px - see below
-    @media (orientation : portrait) , (max-width: 480px) {
-        position : fixed;
-    }
 }
 
 
@@ -23,28 +16,29 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    bottom : 0;
     width: 100%;
     margin: auto;
-    bottom : 0;
-    // .title, .overview, .stage-title, .stages-*, .end-cta
+    // this tries to apply to: .title, .overview, .stage-title, .stages-*, .end-cta
+    // - these get wrapped in scroll divs, however
     > div {
-        position : relative;
-        width: 100%;
+        height : 100%;
         overflow : hidden;
-        box-sizing : border-box;
         display : flex;
-        justify-content : center;
     }
 }
 
 
 // scroll down arrow
 .scroll-down {
-    position : absolute;
-    bottom : 5%;
     display : flex;
     flex-direction : column;
     align-items : center;
+    margin-top : 2.5rem;
+    @media (min-width: 660px) {
+        position : absolute;
+        bottom : 5%;
+    }
     span {
         color : $grey;
         margin-top : 1rem;
@@ -56,38 +50,58 @@ body {
         animation: bounce 1.2s infinite;
         animation-timing-function: ease;
     }
+    // end of animation
+    .end-cta & {
+        margin-bottom: 2.5rem;
+        @media (min-width: 660px) {
+            position : relative;
+            display : block;
+        }
+        @media (min-width: 880px) {
+            margin-bottom : 5rem;
+        }
+    }
 }
 
 
-// svg container and elements
+
+
+// svg container
+// - look at _grid.scss
 .graphic {
     width : 100%;
     height : 100%;
     position : absolute;
     z-index : 1;
+    box-sizing : border-box;
+    top : -110px; // header
+    @media (min-width: 660px) {
+        top : auto;
+    }
+
     // left aligned
-    &.left-graphic {
-        top : 0;
-        bottom : 0;
-        left : -30%;
+    &.left-graphic { 
+        padding-right : 20%;
         @media (min-width: 660px) {
-            height : 87.5%;
             width : 87.5%;
-            top : 7%;
-            left : -18%;
+            height : 87.5%;
+            left : -20%;
+            padding : 0;
         }
         @media (min-width: 880px) {
-            height : 100%;
             width : 100%;
-            top : 0;
+            height : 100%;
             left : -24%;
         }
     }
     // right aligned
     &.right-graphic {
-        width : 60%;
-        right : -5%;
-        z-index : 1;
+        padding-left : 20%;
+        @media (min-width: 660px) {
+            width : 60%;
+            right : -5%;
+            padding : 0;
+        }
     }
 }
 
@@ -108,103 +122,39 @@ svg {
 
 
 
+
+
+
 // ____________________________________________________________________________
 // sections
 
-
-// ___________________
-// 1: title
-.title {
-    height: 100%;
-}
-.title .container {
-    flex-direction : column;
+%stage-flex {
+    height : 100%;
+    display : flex;
     justify-content : center;
-    text-align : center;
-    color : $white;
+}
+
+// title
+.title {
     animation: fadein 2s;
     h1 {
         @include whiteHeading;
     }
     h3 {
         @include subHeading;
-    }
-    
-
-    // small screens
-    @media (orientation : portrait) , (max-width: 480px) {
-        > p, > h1, .scroll-down {
-            display : none;
-        }
-    }
-
-    // small screens
-    // - rotate or get a bigger phone message
-    .small-msg {
-        display : none;
-        @media (orientation : portrait) , (max-width: 480px) {
-            display : flex;
-            flex-direction : column;
-            flex-wrap : wrap;
-            align-items : center;
-            justify-content : center;
-            p {
-                font-size : 1.8rem;
-                font-weight : $normal;
-                padding : 1rem 1.8rem;
-                color : $white;
-                background-color : rgba( $green, .75 );
-            }
-            .icon {
-                position : relative;
-                cursor : pointer;
-                width : 27rem;
-                &:hover {
-                    animation : rotate .75s ease-in-out forwards;
-                }
-            }
-            .fa {
-                color : $green;             
-                &-undo {
-                    position : absolute;
-                    top : 11rem;
-                    left : calc((27rem/2) - 2.25rem);
-                    font-size : 4.5rem;
-                }
-                &-mobile {
-                    font-size : 27rem;
-                }
-                
-            }
-        }
-    }
-    
+    }    
 }
 
-
-
-
-
-
-// ___________________
 // overview
+// - green
 .overview {
-    height: 100%;
-    display : flex;
-    justify-content : center;
+    @extend %stage-flex;
 }
 
-
-
-
-
-// ___________________
 // stages-title
+// - grey
 .stages-title {
-    height : 100%;
-    text-align : center;
-    display : flex;
-    justify-content : center;
+    @extend %stage-flex;
 
     h3 {
         @include subHeading;
@@ -212,20 +162,14 @@ svg {
     }
 } 
 
-
-
-
-// ___________________
 // stage one: MIAMs
+// - orange
 .stage-one {
-    height : 100%;
-    display : flex;
-    justify-content : center;
+    @extend %stage-flex;
 
     .tick {
         stroke : transparent;
         stroke-width : 20;
-        
         // animation: dash .5s linear forwards;
         &.active {
             stroke-dasharray: 1000;
@@ -238,21 +182,19 @@ svg {
 }
 
 
-
-
-
-// ___________________
 // stage two: Mediation Sessions
+// - blue
 .stage-two {
-    height : 100%;
-    display : flex;
-    justify-content : center;
+    @extend %stage-flex;
 
     // resize signpost
-    .signpost {
-        width : 80%;
-        margin-left : 10%;
+    @media (min-width: 660px) {
+        .signpost {
+            width : 80%;
+            margin-left : 10%;
+        }
     }
+    // signs
     .one, .two, .three {
         opacity : 0;
     }
@@ -263,14 +205,10 @@ svg {
 
 
 
-
-
-// ___________________
 // stage three: End of Mediation
+// - red
 .stage-three {
-    height : 100%;
-    display : flex;
-    justify-content : center;
+    @extend %stage-flex;
 
     // signatures
     .signature {
@@ -307,52 +245,25 @@ svg {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// ___________________
 // end CTA: link to able mediation website
+// - green
 .end-cta {
-    height : 100%;
+    @extend %stage-flex;
     text-align : center;
-    display : flex;
-    justify-content : center;
-
-    .container > div {
-        display : flex;
-        flex-direction : column;
-        color : $white;
-    }
 
     h2 {
         align-self : center;
         @include whiteHeading;
     }
 
-    .scroll-down {
-        position : relative;
-        display : none;
-        @media (min-width: 660px) {
-            display : block;
-            margin : 2.4rem 0;
-        }
-        @media (min-width: 880px) {
-            margin : 4.8rem 0;
-        }
-    }
-
     h3 {
         @include subHeading;
-        margin-bottom : 2.4rem;
+        @media (min-width: 660px) {
+            margin-bottom : 2.5rem;
+        }
+        @media (min-width: 880px) {
+            margin-bottom : 5rem;
+        }
     }
 
     .button {

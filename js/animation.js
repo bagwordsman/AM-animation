@@ -10,7 +10,6 @@
 // text settings
 var titleHead = animationSettings.titleHeading,
 titleSub = animationSettings.titleSubheading,
-titleTip = animationSettings.titleTip,
 // overview
 overP = animationSettings.paraOverview,
 whyP = animationSettings.paraWhy,
@@ -24,6 +23,7 @@ stageThreeP = animationSettings.paraThree,
 ctaHead = animationSettings.endCtaHeading,
 ctaSub = animationSettings.endCtaSub,
 ctaBtnText = animationSettings.endCtaLinkText,
+ctaBtnTextSm = animationSettings.endCtaLinkTextSmall,
 ctaBtnLink = animationSettings.endCtaLink,
 
 
@@ -39,7 +39,7 @@ headerOffset = animationSettings.headerOffset;
 // add the text
 $('.title .container > h1').html(titleHead);
 $('.title .container > h3').html(titleSub);
-$('.title .small-msg p').html(titleTip);
+// $('.title .small-msg p').html(titleTip);
 
 $('.overview p').html(overP);
 
@@ -53,6 +53,7 @@ $('.stage-three p').html(stageThreeP);
 $('.end-cta h2').html(ctaHead);
 $('.end-cta h3').html(ctaSub);
 $('.end-cta a').html(ctaBtnText).attr('href', ctaBtnLink);
+$('.end-cta a').attr('data-small', ctaBtnTextSm).attr('data-big', ctaBtnText);
 
 
 // add the svgs
@@ -113,6 +114,53 @@ function hasScrolled() {
 
 
 
+
+// ____________________________
+// cta button - swap out text under 660px;
+
+// resize function
+$( window ).resize(function() {
+    var resize = true;
+    // cta button - text swap
+    btnText(resize);
+});
+
+
+// breakpoint for small text = 660px
+function btnText(resize) {
+
+    // small text substitute
+    if ($('body').innerWidth() < 660) {
+        var smText = $('.end-cta a').attr('data-small');
+        var currentText = $('.end-cta a').text();
+        // only run once per resize:
+        if (smText !== currentText) {
+            $('.end-cta a').text(smText);
+        }               
+    }
+
+    // large text
+    else {
+        var lgText = $('.end-cta a').attr('data-big');
+        var currentText = $('.end-cta a').text();
+        // only run once per resize:
+        if (lgText !== currentText) {
+            $('.end-cta a').text(lgText);
+        }
+
+    }
+}
+// run on load
+btnText();
+
+
+
+
+
+
+
+
+
 // for use in background tweens
 // - make sure there is no white space
 var greenBg = getComputedStyle(document.body).getPropertyValue('--bg_green');
@@ -155,40 +203,8 @@ $(function() {
     var overViewTween = new TimelineMax();
 
     overViewTween
-    
-    // previous code:
-    
-    // .to(".overview .container")
-    // .add(
-    //     TweenMax.to(".overview .container")
-    // )
-    // paragraph 
-    // .add(
-    //     TweenMax.fromTo(".overview .paragraph", 0.25, {
-    //         opacity: 0,
-    //         transform: "translatex(-500px)"
-    //     },
-    //     {
-    //         opacity: 1,
-    //         transform: "translate(0px)",
-    //         ease: "ease-in-out"
-    //     })
-    // )
-    // .add(
-    //     TweenMax.staggerFromTo(".overview svg > g", 1.5, {
-    //         transform: "translate(1000px, -1000px)"
-    //     },
-    //     {
-    //         transform: "translate(0px)",
-    //         ease: "ease-in-out"
-    //     }, 0.15)
-    // );
 
-    // using the folling just after the element is selected makes the next section overlap:
-    // .setPin(".stages-title") // adding ", {pushFollowers: false}"
-
-
-
+    // paragraph
     .fromTo(".overview .paragraph", 0.25, {
         opacity: 0,
         transform: "translatex(-500px)"
@@ -220,6 +236,9 @@ $(function() {
     .setTween(overViewTween)
     .setPin(".overview") // set animation to this section
     .addTo(overViewController);
+
+    // using the folling just after the element is selected makes the next section overlap:
+    // .setPin(".stages-title") // adding ", {pushFollowers: false}"
 
     
 
@@ -259,7 +278,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var stageTitleScene = new ScrollMagic.Scene({
       triggerElement: '.stages-title',
-      duration: "150%", // How many pixels to scroll / animate
+      duration: "200%", // How many pixels to scroll / animate
       triggerHook: 0
     })
     .setTween(stageTitleTween)
@@ -464,7 +483,7 @@ $(function() {
 
     ctaTween
     // heading and content
-    .fromTo(".end-cta .container > div", 0.5, {
+    .fromTo(".end-cta .container", 0.5, {
         opacity: 0,
         transform: "translatex(-500px)"
     },

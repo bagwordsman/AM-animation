@@ -11,8 +11,8 @@
   width: 100%;
   max-width: 1160px;
   margin: 0 auto;
-  padding: 0 20px;
   box-sizing: border-box;
+  padding: 0 20px;
   
   // flexbox part
   z-index : 2;
@@ -23,6 +23,7 @@
     content : none;
     display : none;
   }
+
   // center and right align
   &.center {
     justify-content : center;
@@ -30,8 +31,13 @@
   &.right {
     justify-content : flex-end;
   }
+  // middle (column stack): middle justify and center text align
+  &.middle {
+    flex-direction : column;
+    text-align : center;
+  }
 
-  // container media queries
+  // container width media queries
   @media (min-width: 400px) {
     width: 95%;
     padding: 0;
@@ -39,6 +45,20 @@
   @media (min-width: 480px) {
     width: 90%;
   }
+
+  // 2 column containers: overview and stages
+  &:not(.middle) {
+    padding: 110px 20px 0; // allow space for header
+    align-items : flex-end;
+
+    @media (min-width: 660px) {
+      padding : 0;
+      align-items : center;
+    }
+
+  }
+
+  
 }
 
 
@@ -51,7 +71,7 @@
   box-sizing: border-box;
 
   // columns media queries - general
-  @media (min-width: 480px) {
+  @media (min-width: 660px) { // was 480
     margin-left: 4%;
     &:first-child {
       margin-left: 0;
@@ -62,11 +82,11 @@
 
 // columns media queries - specific
 .columns {
-  @media (min-width: 480px) {
-    &.six {
-      width: 65.3333333333%;
-    }
-  }
+  // @media (min-width: 480px) {
+  //   &.six {
+  //     width: 65.3333333333%;
+  //   }
+  // }
   @media (min-width: 660px) {
     &.six {
       width: 48%;
