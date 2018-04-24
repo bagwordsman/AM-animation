@@ -1,0 +1,148 @@
+//  base styles
+// - typography
+// - keyframes
+// - buttons (move to mixins)
+
+
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+// typography
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.6em; // currently ems cause chrome bug misinterpreting rems on body element
+    line-height: 1.6;
+    font-weight: $normal;
+    font-family: $font-main;
+    color: $grey;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    font-weight: $bold;
+    line-height: 1.6;
+}
+h1 {
+    font-size: 2.8rem;
+    letter-spacing: 0.02rem;
+}
+h2 {
+    font-size: 2.6rem;
+    letter-spacing: 0.03rem;
+}
+h3 {
+    font-size: 2.4rem;
+    letter-spacing: 0.04rem;
+}
+h4 {
+    font-size: 2.1rem;
+    letter-spacing: 0.05rem;
+}
+h5 {
+    font-size: 1.8rem;
+    letter-spacing: 0.06rem;
+}
+h6 {
+    font-size: 1.5rem;
+    letter-spacing: 0.07rem;
+}
+p { margin-top: 0; }
+em { font-style:italic; }
+
+
+
+// make text larger for larger screens
+@media (min-width: 660px) {
+    body { font-size: 1.8rem; }
+    h1 { font-size: 3.6rem; }
+    h2 { font-size: 3.0rem; }
+    h3 { font-size: 2.7rem; }
+    h4 { font-size: 2.4rem; }
+}
+// headings treated differently: hero h1, 
+
+
+
+// Links
+a {
+    color : $green;
+    outline : 0 none;
+    text-decoration : none;
+    transition : all 0.3s ease-in-out 0s;
+    word-break: break-all; // break long links (e.g. urls) onto 2 lines. See disclaimer sections.
+    &:hover {
+        color : $green_dark;
+    }
+}
+
+
+
+// utility classes
+.hidden {
+    display : none;
+}
+  
+
+
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+// keyframes
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes bounce {
+    0%,
+    100% { transform:translateY(-5px); }
+    30% { transform:translateY(10px); }
+}
+
+@keyframes rotate {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(-90deg); }
+}
+
+// stage one / MIAMs
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+// stage two / Mediation sessions
+@keyframes opaque {
+    to {
+        opacity: 1;
+    }
+}
+
+// stage three / end of Mediation
+@keyframes blur {
+    from {
+        // -webkit-filter : blur(5px);
+        filter : url("#blur");
+        transform:translate(-1px, -2px);
+    }
+    to {
+        // -webkit-filter : blur(0px);
+        filter : none;
+        transform:translate(0px);
+        fill : $red;
+    }
+}
+
+
+
+
+
+
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+// buttons
+.button {
+    @include btnType('orange', 'solid');
+}

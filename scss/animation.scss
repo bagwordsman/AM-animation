@@ -2,12 +2,16 @@
 
 // libraries
 "libraries/reset",
-"libraries/font-awesome.min", // note: this could be stripped down - just for accordions
-"libraries/jquery-ui.min",
+"libraries/font-awesome-reduced.min", // note: this could be stripped down - just heading icons and chevrons
 
-// variables
-"variables/animation-variables",
+// variables and mixins
+"variables/variables",
+"variables/mixins",
 
-//
-"layout/grid",
-"pages/mediation-presentation";
+// setup
+"setup/grid",
+"setup/base",
+
+// sections
+"sections/header",
+"sections/mediation-presentation";

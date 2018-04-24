@@ -1,90 +1,69 @@
+// file contents:
+// - import text from animationSettings.js
+// - import svg files from svg folder
+// - add tweens (animations for each stage)
+// - debug setting - add indicators
+// - add svg gradient code
+// - constructor functions
 
 
-var titleH1 = animationSettings.headingH1,
-     titleP = animationSettings.headingP,
-     smallP = animationSettings.smallMsg,
-      overP = animationSettings.paraOverview,
-       whyP = animationSettings.paraWhy,
-   stagesH2 = animationSettings.headingStages,
-  stageOneP = animationSettings.paraOne,
-  stageTwoP = animationSettings.paraTwo,
+// text settings
+var titleHead = animationSettings.titleHeading,
+titleSub = animationSettings.titleSubheading,
+titleTip = animationSettings.titleTip,
+// overview
+overP = animationSettings.paraOverview,
+whyP = animationSettings.paraWhy,
+//stages intro
+stagesHead = animationSettings.headingStages,
+// sections
+stageOneP = animationSettings.paraOne,
+stageTwoP = animationSettings.paraTwo,
 stageThreeP = animationSettings.paraThree,
-      ctaH2 = animationSettings.endCtaHeading,
-       ctaP = animationSettings.endCtaText,
- ctaBtnText = animationSettings.endCtaLinkText,
- ctaBtnLink = animationSettings.endCtaLink ;
+// end cta
+ctaHead = animationSettings.endCtaHeading,
+ctaSub = animationSettings.endCtaSub,
+ctaBtnText = animationSettings.endCtaLinkText,
+ctaBtnLink = animationSettings.endCtaLink,
 
 
-         
-// ____________________________  
-// add all the content
-$('.title .container > h1').html(titleH1);
-$('.title .container > p').html(titleP);
-$('.small-msg p').html(smallP);
+
+// general settings
+debug = animationSettings.debug,
+headerOffset = animationSettings.headerOffset;
+
+
+
+ 
+// ____________________________
+// add the text
+$('.title .container > h1').html(titleHead);
+$('.title .container > h3').html(titleSub);
+$('.title .small-msg p').html(titleTip);
 
 $('.overview p').html(overP);
 
-$('.stages-title h2').html(stagesH2);
+$('.stages-title h3').html(stagesHead);
 
 $('.stage-one p').html(stageOneP);
 $('.stage-two p').html(stageTwoP);
 $('.stage-three p').html(stageThreeP);
 
 // cta
-$('.end-cta h2').html(ctaH2);
-$('.end-cta p').html(ctaP);
+$('.end-cta h2').html(ctaHead);
+$('.end-cta h3').html(ctaSub);
 $('.end-cta a').html(ctaBtnText).attr('href', ctaBtnLink);
 
 
+// add the svgs
+$('.overview .graphic').load('svg/puzzle.svg');
+$('.stage-one .graphic').load('svg/clipboard.svg');
+$('.stage-two .graphic').load('svg/signpost.svg');
+$('.stage-three .graphic').load('svg/document.svg');
 
 
 
 
-// ____________________________
-// svg gradients
-// - signpost
-// - chrome bug causes gradient to not work on the pole
-// - workaround: https://stackoverflow.com/questions/10894377/dynamically-adding-a-svg-gradient
-createGradient($('.stage-two svg')[0],'PoleGradient',[
-    // add colour stops here
-    {offset:'0', 'stop-color':'#c0c0c0', 'stop-opacity':1},
-    {offset:'100%','stop-color':'#c0c0c0', 'stop-opacity':0}
-]);
-
-$('.stage-two svg path.pole').attr({
-    fill : 'url(#PoleGradient)'
-});
-
-// this makes the gradient vertical for svg:
-// x1="0" x2="0" y1="0" y2="1"
-
-
-// svg:   the owning <svg> element
-// id:    an id="..." attribute for the gradient
-// stops: an array of objects with <stop> attributes
-function createGradient(svg,id,stops){
-var svgNS = svg.namespaceURI;
-var grad  = document.createElementNS(svgNS,'linearGradient');
-grad.setAttribute('id',id);
-// make gradient vertical:
-grad.setAttribute('x1',0);
-grad.setAttribute('x2',0);
-grad.setAttribute('y1',0);
-grad.setAttribute('y2',1);
-// add colour stops:
-for (var i=0;i<stops.length;i++){
-    var attrs = stops[i];
-    var stop = document.createElementNS(svgNS,'stop');
-    for (var attr in attrs){
-    if (attrs.hasOwnProperty(attr)) stop.setAttribute(attr,attrs[attr]);
-    }
-    grad.appendChild(stop);
-}
-
-var defs = svg.querySelector('defs') ||
-    svg.insertBefore( document.createElementNS(svgNS,'defs'), svg.firstChild);
-return defs.appendChild(grad);
-}
 
 
 
@@ -94,7 +73,7 @@ return defs.appendChild(grad);
 // header - scroll page to hide
 var didScroll;
 var lastScrollTop = 0;
-var delta = 5;
+var delta = headerOffset; // no. of pixels to scroll up to activate header. previously set to 5
 var navbarHeight = $('.header').outerHeight();
 
 $(window).scroll(function(event){
@@ -134,21 +113,40 @@ function hasScrolled() {
 
 
 
+// for use in background tweens
+// - make sure there is no white space
+var greenBg = getComputedStyle(document.body).getPropertyValue('--bg_green');
+var greyBg = getComputedStyle(document.body).getPropertyValue('--bg_grey');
+var orangeBg = getComputedStyle(document.body).getPropertyValue('--bg_orange');
+var blueBg = getComputedStyle(document.body).getPropertyValue('--bg_blue');
+var redBg = getComputedStyle(document.body).getPropertyValue('--bg_red');
+var signpostBg = getComputedStyle(document.body).getPropertyValue('--sign_grey');
+
+
+
+// convert hex to rgb (not required):
+// function hexToRgb(hex) {
+//     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+//     return result ? {
+//         r: parseInt(result[1], 16),
+//         g: parseInt(result[2], 16),
+//         b: parseInt(result[3], 16)
+//     } : null;
+// }
 
 
 
 
 
 
-
-// ____________________________
+// ____________________________________________________________________________________
 // scrollmagic animations
 
 // 1 - title
 $(function() {
 
     
-    // ___________
+    // ____________________________
     // overView
     var overViewController = new ScrollMagic.Controller();
 
@@ -156,61 +154,82 @@ $(function() {
     // - note: this makes tweens occur sequentially
     var overViewTween = new TimelineMax();
 
-    overViewTween.add(
-        TweenMax.to('.overview .container')
-    );
-
+    overViewTween
+    
+    // previous code:
+    
+    // .to(".overview .container")
+    // .add(
+    //     TweenMax.to(".overview .container")
+    // )
     // paragraph 
-    overViewTween.add(
-        TweenMax.fromTo(".overview .paragraph", 0.25, {
-            opacity: 0,
-            transform: "translatex(-500px)"
-        },
-        {
-            opacity: 1,
-            transform: "translate(0px)", ease: "ease-in-out"
-        })
-    );
+    // .add(
+    //     TweenMax.fromTo(".overview .paragraph", 0.25, {
+    //         opacity: 0,
+    //         transform: "translatex(-500px)"
+    //     },
+    //     {
+    //         opacity: 1,
+    //         transform: "translate(0px)",
+    //         ease: "ease-in-out"
+    //     })
+    // )
+    // .add(
+    //     TweenMax.staggerFromTo(".overview svg > g", 1.5, {
+    //         transform: "translate(1000px, -1000px)"
+    //     },
+    //     {
+    //         transform: "translate(0px)",
+    //         ease: "ease-in-out"
+    //     }, 0.15)
+    // );
+
+    // using the folling just after the element is selected makes the next section overlap:
+    // .setPin(".stages-title") // adding ", {pushFollowers: false}"
+
+
+
+    .fromTo(".overview .paragraph", 0.25, {
+        opacity: 0,
+        transform: "translatex(-500px)"
+    },
+    {
+        opacity: 1,
+        transform: "translate(0px)",
+        ease: "ease-in-out"
+    })
 
     // puzzle svg
-    overViewTween.add(
-        TweenMax.staggerFromTo(".overview svg > g", 1.5, {
-            transform: "translate(1000px, -1000px)"
-        },
-        {
-            transform: "translate(0px)", ease: "ease-in-out"
-        }, 0.15)
-    );
+    .staggerFromTo(".overview svg > g", 1.5, {
+        transform: "translate(1000px, -1000px)"
+    },
+    {
+        transform: "translate(0px)",
+        ease: "ease-in-out"
+    }, 0.15)
+
+    
     
     // Create the Scene and trigger when visible
     var overViewScene = new ScrollMagic.Scene({
-      triggerElement: '.overview',
+      triggerElement: ".overview",
       duration: "600%", // How many pixels / % to scroll / animate
-      triggerHook: 0
+      triggerHook: 0,
+      
     })
     .setTween(overViewTween)
-    // .addIndicators({name: "staggering"}) - debug staggering puzzle
-    .setPin(".overview")
+    .setPin(".overview") // set animation to this section
     .addTo(overViewController);
-    
-    // Add debug indicators fixed on right side
-    // overViewScene.addIndicators({name: 'overview'});
+
     
 
 
     
 
 
-
-
-
-
-
-
-
-
-
-    // ___________
+    
+    
+    // ____________________________
     // stages title
     var stageTitleController = new ScrollMagic.Controller();
 
@@ -218,19 +237,23 @@ $(function() {
     var stageTitleTween = new TimelineMax();
 
     // heading 
-    stageTitleTween.fromTo(".stages-title h2", 0.5, {
+    stageTitleTween
+    .fromTo(".stages-title h3", 0.5, {
         opacity: 0,
         transform: "translatex(-500px)"
     },
     {
         opacity: 1,
-        transform: "translatex(0px)", ease: Power2.easeOut
+        transform: "translatex(0px)",
+        ease: Power2.easeOut
     })
 
     // body colour
     .to("body", 1,  {
-        backgroundColor: "rgb(221, 221, 221)", ease: Power1.easeOut
-    }, 0) // add at a time of 0 seconds - i.e. at start trigger
+        backgroundColor: greyBg,
+        ease: Power1.easeOut // 
+    }, 0)
+
 
     
     // Create the Scene and trigger when visible
@@ -240,11 +263,9 @@ $(function() {
       triggerHook: 0
     })
     .setTween(stageTitleTween)
-    .setPin(".stages-title") // adding ", {pushFollowers: false}" here makes the next html go through the pinned element
+    .setPin(".stages-title")
     .addTo(stageTitleController);
     
-    // Add debug indicators fixed on right side
-    // stageTitleScene.addIndicators({name: 'stages title'});
 
 
 
@@ -256,16 +277,16 @@ $(function() {
 
 
 
-
-    // ___________
+    // ____________________________
     // MIAMs
     var miamController = new ScrollMagic.Controller();
 
     // create a timeline to add tweens to
     var miamTween = new TimelineMax();
 
+    miamTween
     // heading and content
-    miamTween.fromTo(".stage-one .paragraph", 0.5, {
+    .fromTo(".stage-one .paragraph", 0.5, {
         opacity: 0,
         transform: "translatex(500px)"
     },
@@ -273,11 +294,9 @@ $(function() {
         opacity: 1,
         transform: "translatex(0px)", ease: Power2.easeOut
     })
-
-    // - - - - 
     // add clipboard
-    miamTween.fromTo(".stage-one svg", 0.25, {
-        transform: "translate(-500px, 500px)"
+    .fromTo(".stage-one svg", 0.25, {
+        transform: "translate(-600px, 500px)"
     },
     {
         transform: "translate(0px)", ease: Power2.easeOut
@@ -286,18 +305,16 @@ $(function() {
     // add ticks
     // - active getting added to first item immediately, adding delay causes fadein
     // - empty item hack(s) added
-    miamTween.staggerTo(["", ".stage-one .tick.one", ".stage-one .tick.two", ".stage-one .tick.three", "", ""], 0, {
+    .staggerTo(["", ".stage-one .tick.one", ".stage-one .tick.two", ".stage-one .tick.three", "", ""], 0, {
         className:"+=active"
     }, 0.35)
 
-    // - - - - 
+
     // body colour
     .to("body", 1,  {
-        backgroundColor: "rgb(249, 203, 174)", ease: Power1.easeOut
+        backgroundColor: orangeBg,
+        ease: Power1.easeOut
     }, 0) // add at a time of 0 seconds - i.e. at start trigger
-
-    // miamTween.shiftChildren(-1)
-    // console.log(miamTween);
 
 
     // Create the Scene and trigger when visible
@@ -307,10 +324,8 @@ $(function() {
         triggerHook: 0
     })
     .setTween(miamTween)
-    .setPin(".stage-one") // adding ", {pushFollowers: false}" here makes the next html go through the pinned element
+    .setPin(".stage-one")
     .addTo(miamController);
-    // miamScene.addIndicators({name: 'miam'});
-
 
 
 
@@ -322,15 +337,16 @@ $(function() {
 
     
     
-    // ___________
+    // ____________________________
     // Mediation Sessions
     var mediationController = new ScrollMagic.Controller();
 
     // create a timeline to add tweens to
     var mediationTween = new TimelineMax();
 
+    mediationTween
     // heading and content
-    mediationTween.fromTo(".stage-two .paragraph", 0.5, {
+    .fromTo(".stage-two .paragraph", 0.5, {
         opacity: 0,
         transform: "translatex(-500px)"
     },
@@ -339,10 +355,8 @@ $(function() {
         transform: "translatex(0px)", ease: Power2.easeOut
     })
 
-    
-    // - - - -
     // add signpost
-    mediationTween.fromTo(".stage-two svg", 0.25, {
+    .fromTo(".stage-two svg", 0.25, {
         transform: "translate(0, 600px)"
     },
     {
@@ -351,21 +365,18 @@ $(function() {
 
     // reveal signs - fade in
     // - empty item hack(s) added - as above
-    mediationTween.staggerTo(["", ".stage-two .one", ".stage-two .two", ".stage-two .three", "", ""], 0, {
+    .staggerTo(["", ".stage-two .one", ".stage-two .two", ".stage-two .three", "", ""], 0, {
         className:"+=opaque"
     }, 1)
     
-    
-    
-    // - - - - 
+
     // body colour
     .to("body", 1,  {
-        backgroundColor: "rgb(203, 230, 255)", ease: Power1.easeOut
+        backgroundColor: blueBg,
+        ease: Power1.easeOut
     }, 0) // add at a time of 0 seconds - i.e. at start trigger
 
 
-
-    // - - - -
     // Create the Scene and trigger when visible
     var mediationScene = new ScrollMagic.Scene({
         triggerElement: '.stage-two',
@@ -373,7 +384,7 @@ $(function() {
         triggerHook: 0
     })
     .setTween(mediationTween)
-    .setPin(".stage-two") // adding ", {pushFollowers: false}" here makes the next html go through the pinned element
+    .setPin(".stage-two")
     .addTo(mediationController);
 
 
@@ -383,17 +394,19 @@ $(function() {
 
 
 
+
     
     
-    // ___________
+    // ____________________________
     // Mediation End
     var endController = new ScrollMagic.Controller();
 
     // create a timeline to add tweens to
     var endTween = new TimelineMax();
 
+    endTween
     // heading and content
-    endTween.fromTo(".stage-three .paragraph", 0.5, {
+    .fromTo(".stage-three .paragraph", 0.5, {
         opacity: 0,
         transform: "translatex(500px)"
     },
@@ -401,31 +414,24 @@ $(function() {
         opacity: 1,
         transform: "translatex(0px)", ease: Power2.easeOut
     })
-
-    // - - - -
-    // add document
-    endTween.fromTo(".stage-three svg", 0.25, {
+    // add document svg
+    .fromTo(".stage-three svg", 0.25, {
         transform: "translate(-750px, -500px)"
     },
     {
         transform: "translate(0px)", ease: Power2.easeOut
     }, 0.5)
-
     // add signatures
-    endTween.staggerTo(["", ".stage-three .signature.one", ".stage-three .signature.two", ".stage-three .stamp.three", "", ""], 0, {
+    .staggerTo(["", ".stage-three .signature.one", ".stage-three .signature.two", ".stage-three .stamp.three", "", ""], 0, {
         className:"+=active"
-    }, 0.35)
-    
-    
-    // - - - - 
+    }, 0.35) 
+
     // body colour
     .to("body", 1,  {
-        backgroundColor: "rgb(245, 184, 179)", ease: Power1.easeOut
+        backgroundColor: redBg,
+        ease: Power1.easeOut
     }, 0) // add at a time of 0 seconds - i.e. at start trigger
 
-
-
-    // - - - -
     // Create the Scene and trigger when visible
     var endScene = new ScrollMagic.Scene({
         triggerElement: '.stage-three',
@@ -433,10 +439,11 @@ $(function() {
         triggerHook: 0
     })
     .setTween(endTween)
-    .setPin(".stage-three") // adding ", {pushFollowers: false}" here makes the next html go through the pinned element
+    .setPin(".stage-three")
     .addTo(endController);
 
 
+    
 
 
 
@@ -446,15 +453,18 @@ $(function() {
 
 
 
-    // ___________
+
+
+    // ____________________________
     // CTA
     var ctaController = new ScrollMagic.Controller();
 
     // create a timeline to add tweens to
     var ctaTween = new TimelineMax();
 
+    ctaTween
     // heading and content
-    ctaTween.fromTo(".end-cta .container > div", 0.5, {
+    .fromTo(".end-cta .container > div", 0.5, {
         opacity: 0,
         transform: "translatex(-500px)"
     },
@@ -462,17 +472,12 @@ $(function() {
         opacity: 1,
         transform: "translatex(0px)", ease: Power2.easeOut
     })
-
-    
-    // - - - - 
     // body colour
     .to("body", 1,  {
-        backgroundColor: "rgb(199, 230, 182)", ease: Power1.easeOut
+        backgroundColor: greenBg,
+        ease: Power1.easeOut
     }, 0) // add at a time of 0 seconds - i.e. at start trigger
 
-
-
-    // - - - -
     // Create the Scene and trigger when visible
     var ctaScene = new ScrollMagic.Scene({
         triggerElement: '.end-cta',
@@ -480,58 +485,80 @@ $(function() {
         triggerHook: 0
     })
     .setTween(ctaTween)
-    .setPin(".end-cta") // adding ", {pushFollowers: false}" here makes the next html go through the pinned element
+    .setPin(".end-cta")
     .addTo(ctaController);
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     
     
     
-    // __________________________________________________________________
+    // ____________________________
+    // Add debug indicators fixed on right side
+    // stageTitleScene.addIndicators({name: 'stages title'});
+    if (debug == true) {
+        overViewScene.addIndicators({name: 'overview', indent: 0});
+        stageTitleScene.addIndicators({name: 'stages title', indent: 150});
+        miamScene.addIndicators({name: 'miam', indent: 300});
+        mediationScene.addIndicators({name: 'mediation', indent: 450});
+        endScene.addIndicators({name: 'end', indent: 600});
+        ctaScene.addIndicators({name: 'cta', indent: 750});
+    }
 
 
-    // overViewTween.add(
-    //     TweenMax.to(".overview .paragraph", 0.25, {
-    //         opacity: '1',
-    //         transform: 'translatex(0px)'
-    //     })
-    // );
 
 
 
 
 
-    // stages
-    // var stageTitleController = new ScrollMagic.Controller();
-    
-    // var stageTitleTween = TweenMax.to('.stages-title .container', 1 );
-    
-    
-    // // Create the Scene and trigger when visible
-    // var stageTitleScene = new ScrollMagic.Scene({
-    //   triggerElement: '.stages-title',
-    //   duration: "250%", // How many pixels to scroll / animate
-    //   triggerHook: 0
-    // })
-    // .setTween(stageTitleTween)
-    // .setPin(".stages-title") // adding ", {pushFollowers: false}" here makes the next html go through the pinned element
-    // .addTo(stageTitleController);
-    
-    // // Add debug indicators fixed on right side
-    // stageTitleScene .addIndicators();
+
+    // ____________________________________________________________________________________
+    // svg gradients
+    // - signpost
+    // - chrome bug causes gradient to not work on the pole
+    // - workaround: https://stackoverflow.com/questions/10894377/dynamically-adding-a-svg-gradient
+    createGradient($('.stage-two svg')[0],'PoleGradient',[
+        // add colour stops here
+        // '#c0c0c0'
+        {offset:'0', 'stop-color':signpostBg, 'stop-opacity':1},
+        {offset:'100%','stop-color':signpostBg, 'stop-opacity':0}
+    ]);
+
+    $('.stage-two svg path.pole').attr({
+        fill : 'url(#PoleGradient)'
+    });
+
+    // this makes the gradient vertical for svg:
+    // x1="0" x2="0" y1="0" y2="1"
+
+
+    // svg:   the owning <svg> element
+    // id:    an id="..." attribute for the gradient
+    // stops: an array of objects with <stop> attributes
+    function createGradient(svg,id,stops){
+    var svgNS = svg.namespaceURI;
+    var grad  = document.createElementNS(svgNS,'linearGradient');
+    grad.setAttribute('id',id);
+    // make gradient vertical:
+    grad.setAttribute('x1',0);
+    grad.setAttribute('x2',0);
+    grad.setAttribute('y1',0);
+    grad.setAttribute('y2',1);
+    // add colour stops:
+    for (var i=0;i<stops.length;i++){
+        var attrs = stops[i];
+        var stop = document.createElementNS(svgNS,'stop');
+        for (var attr in attrs){
+        if (attrs.hasOwnProperty(attr)) stop.setAttribute(attr,attrs[attr]);
+        }
+        grad.appendChild(stop);
+    }
+
+    var defs = svg.querySelector('defs') ||
+        svg.insertBefore( document.createElementNS(svgNS,'defs'), svg.firstChild);
+    return defs.appendChild(grad);
+    }
 
 
 

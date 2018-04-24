@@ -4,12 +4,20 @@ var animationSettings = (function() {
             
             
             // ______________________________________________________
+            // general settings
+            headerOffset : 200, // scroll up to reveal header (px)
+            debug : false, // add indicators
+            
+            
+            
+            
+            // ______________________________________________________
             // text content
 
             // title
-            headingH1 : 'What is Family Mediation?',
-            headingP : 'A brief guide to the Family Mediation Process',
-            smallMsg : 'Please rotate your device to landscape view',
+            titleHeading : 'What is Family Mediation?',
+            titleSubheading : 'A brief guide to the Family Mediation Process',
+            titleTip : 'Please rotate your device to landscape view',
 
 
             // overview
@@ -30,7 +38,7 @@ var animationSettings = (function() {
             // end call to action
             
             endCtaHeading : 'Want to find out more?',
-            endCtaText : 'Contact us for a free 20 minute telephone consultation',
+            endCtaSub : 'Contact us for a free 20 minute telephone consultation',
             endCtaLinkText : 'Speak to a Family Mediator now',
             endCtaLink : 'https://www.ablemediation.com/contact/'
 

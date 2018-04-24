@@ -1,0 +1,175 @@
+// mixins
+// - headings
+// - paragraphs
+// - buttons
+// - gradient
+
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+// colour mapping - for hovers
+// - just used on buttons, could be used on paragraphs too
+$hoverColours: (
+  'green' : $green,
+  'green-hover' : $green_dark,
+  'orange' : $orange,
+  'orange-hover' : $orange_dark,
+  'blue' : $blue,
+  'blue-hover' : $green_dark,
+  'red' : $red,
+  'red-hover' : $red_dark
+);
+
+
+
+
+
+// __________________________________________________
+// headings
+
+// main heading
+@mixin whiteHeading {
+    font-weight : $bold;
+    margin-bottom : 1rem;
+    text-shadow : $text-shadow;
+    color : $white;
+    font-size : 4.5rem;
+    @media (min-width: 660px) {
+        font-size : 5.25rem;
+    }
+    @media (min-width: 880px) {
+        font-size : 6rem;
+    }
+}
+
+
+// sub headings
+// - h3 headings with background
+// - need to change font size and padding responsively, see pBackground mixin
+@mixin subHeading {
+    display : inline-block;
+    font-style : italic;
+    margin : 0;
+    padding : 0 2rem;
+    box-sizing : border-box;
+    background-color : $green;
+    color : $white;
+
+    // font size from previous pBackground mixin
+    font-size : 2rem; // default = 2.4
+    @media (min-width: 660px) {
+        font-size : 2.2rem; // default = 2.7
+    }
+    @media (min-width: 880px) {
+        font-size : 2.7rem; // default = 2.7
+    }
+
+    @content;
+}
+
+
+
+// __________________________________________________
+// paragraphs
+// - with top borders
+@mixin topBorderPara {
+    border-top : 10px solid transparent;
+    margin-top : 2.5rem;
+    padding-top : 1.5rem;
+    z-index : 2;
+    @media (min-width: 660px) {
+        margin-top : 0;
+        padding-top : 2.5rem;
+    }
+    // text size, enforce bold italic
+    h3 {
+        margin-bottom : 1rem;
+        font-size : 1.8rem; // 2.6rem = default
+        font-style : italic;
+        font-weight : $bold;
+        @media (min-width: 660px) {
+            font-size : 2.1rem; // 2.7rem = default
+        }
+        @media (min-width: 880px) {
+            font-size : 2.4rem; // 2.7rem = default
+        }
+    }
+
+    // output different border colours
+    $colours : 'green', 'orange', 'blue', 'red';   
+    $colour_codes : $green, $orange, $blue, $red;
+    $dark-colour_codes : $green_dark, $orange_dark, $blue_dark, $red_dark;
+    @for $i from 1 through length($colours) {
+        &.#{nth($colours, $i)} {
+            border-top-color : nth($colour_codes, $i);
+            a {
+            color : nth($colour_codes, $i);
+                &:hover {
+                    color : nth($dark-colour_codes, $i);
+                }
+            }
+        }
+    }
+
+    @content;
+}
+
+
+
+
+// __________________________________________________
+// buttons
+// - handles colours
+// - handles outline and solid
+@mixin btnType($colourName, $style){
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: $bold;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 4px;
+    cursor : pointer;
+    box-sizing: border-box;
+    transition: all ease-in-out 0.3s;
+    background-color: transparent;
+
+    // outline
+    @if $style == 'outline' {
+        color : map-get($hoverColours, $colourName);
+        border: 3px solid map-get($hoverColours, $colourName);
+        &:hover,
+        &:focus {
+            color : $white;
+            background-color : map-get($hoverColours, $colourName);
+        }
+    }
+
+    // solid
+    @if $style == 'solid' {
+        color : $white;
+        background-color : map-get($hoverColours, $colourName);
+        &:hover,
+        &:focus {
+            color : $white;
+            background-color: map-get($hoverColours, #{$colourName}#{-hover});
+        }
+    }
+    @content;
+}
+
+
+
+// __________________________________________________
+// gradient
+// - not used
+// @mixin verticalGradient($top, $bottom){
+//     background: $top; // Old browsers
+//     background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); // FF3.6+
+//     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); // Chrome,Safari4+
+//     background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); // Chrome10+,Safari5.1+
+//     background: -o-linear-gradient(top,  $top 0%,$bottom 100%); // Opera 11.10+
+//     background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); // IE10+
+//     background: linear-gradient(to bottom,  $top 0%,$bottom 100%); // W3C
+//     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 ); // IE6-9
+// }

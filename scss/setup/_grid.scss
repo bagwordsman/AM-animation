@@ -1,0 +1,75 @@
+// Grid
+// - general layout at different sizes
+// - modified, uses flexbox
+
+
+
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+// container
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  
+  // flexbox part
+  z-index : 2;
+  display : flex;
+  align-items : center;
+  // fix flex - can't deal with after
+  &::after{
+    content : none;
+    display : none;
+  }
+  // center and right align
+  &.center {
+    justify-content : center;
+  }
+  &.right {
+    justify-content : flex-end;
+  }
+
+  // container media queries
+  @media (min-width: 400px) {
+    width: 95%;
+    padding: 0;
+  }
+  @media (min-width: 480px) {
+    width: 90%;
+  }
+}
+
+
+
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+// columns
+.column,
+.columns {
+  width: 100%;
+  box-sizing: border-box;
+
+  // columns media queries - general
+  @media (min-width: 480px) {
+    margin-left: 4%;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+
+// columns media queries - specific
+.columns {
+  @media (min-width: 480px) {
+    &.six {
+      width: 65.3333333333%;
+    }
+  }
+  @media (min-width: 660px) {
+    &.six {
+      width: 48%;
+    }
+  }
+}
