@@ -351,7 +351,7 @@ h6 {
   letter-spacing: 0.07rem; }
 
 p {
-  margin-top: 0; }
+  margin: 0; }
 
 em {
   font-style: italic; }
@@ -572,7 +572,7 @@ svg {
 .paragraph {
   border-top: 10px solid transparent;
   margin-top: 2.5rem;
-  padding: 1.5rem 0 2.5rem;
+  padding: 1.5rem 0;
   z-index: 2; }
   @media (min-width: 660px) {
     .paragraph {

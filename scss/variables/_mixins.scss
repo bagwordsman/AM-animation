@@ -74,7 +74,8 @@ $hoverColours: (
 @mixin topBorderPara {
     border-top : 10px solid transparent;
     margin-top : 2.5rem;
-    padding : 1.5rem 0 2.5rem;
+    padding : 1.5rem 0;
+    // padding : 1.5rem 0 2.5rem;
     z-index : 2;
     @media (min-width: 660px) {
         margin-top : 0;
