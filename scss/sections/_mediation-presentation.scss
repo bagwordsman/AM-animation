@@ -111,15 +111,35 @@ svg {
 }
 
 
+
+// force hardware acceleration: remedy for safari ios jumpy-ness
+%safariFix {
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
 // paragraphs
 .paragraph {
     @include topBorderPara;
+    @extend %safariFix;
 }
 
 
 
-
-
+// test out safari ios: force hardware acceleration
+// - apply to all animated elements
+.overview svg > g,
+.stages-title h3,
+.stage-one svg,
+.stage-one .tick,
+.stage-two svg,
+.stage-two svg > g,
+.stage-three svg,
+.stage-three svg > g,
+.end-cta .container {
+    @extend %safariFix;
+}
 
 
 

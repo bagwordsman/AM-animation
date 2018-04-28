@@ -561,6 +561,19 @@ svg {
   width: 100%;
   height: 100%; }
 
+.paragraph, .overview svg > g,
+.stages-title h3,
+.stage-one svg,
+.stage-one .tick,
+.stage-two svg,
+.stage-two svg > g,
+.stage-three svg,
+.stage-three svg > g,
+.end-cta .container {
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-transform: translate3d(0, 0, 0); }
+
 .paragraph {
   border-top: 10px solid transparent;
   margin-top: 2.5rem;
