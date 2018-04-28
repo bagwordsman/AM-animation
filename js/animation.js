@@ -179,12 +179,65 @@ var signpostBg = getComputedStyle(document.body).getPropertyValue('--sign_grey')
 // }
 
 // add the svgs
-$('.overview .graphic').load('svg/puzzle.svg');
-$('.stage-one .graphic').load('svg/clipboard.svg');
-$('.stage-two .graphic').load('svg/signpost.svg');
-$('.stage-three .graphic').load('svg/document.svg');
+// - now done with php
+// $('.overview .graphic').load('svg/puzzle.svg');
+// $('.stage-one .graphic').load('svg/clipboard.svg');
+// $('.stage-two .graphic').load('svg/signpost.svg');
+// $('.stage-three .graphic').load('svg/document.svg');
 
 
+
+
+
+
+
+
+// ____________________________________________________________________________________
+// svg gradients
+// - signpost
+// - chrome bug causes gradient to not work on the pole
+// - workaround: https://stackoverflow.com/questions/10894377/dynamically-adding-a-svg-gradient
+createGradient($('.stage-two svg')[0],'PoleGradient',[
+    // add colour stops here
+    // '#c0c0c0'
+    {offset:'0', 'stop-color':signpostBg, 'stop-opacity':1},
+    {offset:'100%','stop-color':signpostBg, 'stop-opacity':0}
+]);
+
+$('.stage-two svg path.pole').attr({
+    fill : 'url(#PoleGradient)'
+});
+
+// this makes the gradient vertical for svg:
+// x1="0" x2="0" y1="0" y2="1"
+
+
+// svg:   the owning <svg> element
+// id:    an id="..." attribute for the gradient
+// stops: an array of objects with <stop> attributes
+function createGradient(svg,id,stops){
+var svgNS = svg.namespaceURI;
+var grad  = document.createElementNS(svgNS,'linearGradient');
+grad.setAttribute('id',id);
+// make gradient vertical:
+grad.setAttribute('x1',0);
+grad.setAttribute('x2',0);
+grad.setAttribute('y1',0);
+grad.setAttribute('y2',1);
+// add colour stops:
+for (var i=0;i<stops.length;i++){
+    var attrs = stops[i];
+    var stop = document.createElementNS(svgNS,'stop');
+    for (var attr in attrs){
+    if (attrs.hasOwnProperty(attr)) stop.setAttribute(attr,attrs[attr]);
+    }
+    grad.appendChild(stop);
+}
+
+var defs = svg.querySelector('defs') ||
+    svg.insertBefore( document.createElementNS(svgNS,'defs'), svg.firstChild);
+return defs.appendChild(grad);
+}
 
 
 // ____________________________________________________________________________________
@@ -233,7 +286,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var overViewScene = new ScrollMagic.Scene({
       triggerElement: ".overview",
-      duration: "3000px", // was 600%
+      duration: "2000px", // was 600%
       triggerHook: 0,
       
     })
@@ -282,7 +335,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var stageTitleScene = new ScrollMagic.Scene({
       triggerElement: '.stages-title',
-      duration: "1500px", // was 200%
+      duration: "1000px", // was 200%
       triggerHook: 0
     })
     .setTween(stageTitleTween)
@@ -343,7 +396,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var miamScene = new ScrollMagic.Scene({
         triggerElement: '.stage-one',
-        duration: "3000px", // was 600%
+        duration: "2000px", // was 600%
         triggerHook: 0
     })
     .setTween(miamTween)
@@ -445,7 +498,7 @@ $(function() {
         transform: "translate(0px)", ease: Power2.easeOut
     }, 0.5)
     // add signatures
-    .staggerTo(["", ".stage-three .signature.one", ".stage-three .signature.two", ".stage-three .stamp.three", "", ""], 0, {
+    .staggerTo(["", ".stage-three .signature.one", ".stage-three .signature.two", ".stage-three .stamp.three", "", "", ""], 0, {
         className:"+=active"
     }, 0.35) 
 
@@ -458,7 +511,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var endScene = new ScrollMagic.Scene({
         triggerElement: '.stage-three',
-        duration: "3000px", // was 600%
+        duration: "2000px", // was 600%
         triggerHook: 0
     })
     .setTween(endTween)
@@ -504,7 +557,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var ctaScene = new ScrollMagic.Scene({
         triggerElement: '.end-cta',
-        duration: "1500px", // How many pixels to scroll / animate
+        duration: "2000px", // How many pixels to scroll / animate
         triggerHook: 0
     })
     .setTween(ctaTween)
@@ -536,52 +589,7 @@ $(function() {
 
 
 
-    // ____________________________________________________________________________________
-    // svg gradients
-    // - signpost
-    // - chrome bug causes gradient to not work on the pole
-    // - workaround: https://stackoverflow.com/questions/10894377/dynamically-adding-a-svg-gradient
-    createGradient($('.stage-two svg')[0],'PoleGradient',[
-        // add colour stops here
-        // '#c0c0c0'
-        {offset:'0', 'stop-color':signpostBg, 'stop-opacity':1},
-        {offset:'100%','stop-color':signpostBg, 'stop-opacity':0}
-    ]);
-
-    $('.stage-two svg path.pole').attr({
-        fill : 'url(#PoleGradient)'
-    });
-
-    // this makes the gradient vertical for svg:
-    // x1="0" x2="0" y1="0" y2="1"
-
-
-    // svg:   the owning <svg> element
-    // id:    an id="..." attribute for the gradient
-    // stops: an array of objects with <stop> attributes
-    function createGradient(svg,id,stops){
-    var svgNS = svg.namespaceURI;
-    var grad  = document.createElementNS(svgNS,'linearGradient');
-    grad.setAttribute('id',id);
-    // make gradient vertical:
-    grad.setAttribute('x1',0);
-    grad.setAttribute('x2',0);
-    grad.setAttribute('y1',0);
-    grad.setAttribute('y2',1);
-    // add colour stops:
-    for (var i=0;i<stops.length;i++){
-        var attrs = stops[i];
-        var stop = document.createElementNS(svgNS,'stop');
-        for (var attr in attrs){
-        if (attrs.hasOwnProperty(attr)) stop.setAttribute(attr,attrs[attr]);
-        }
-        grad.appendChild(stop);
-    }
-
-    var defs = svg.querySelector('defs') ||
-        svg.insertBefore( document.createElementNS(svgNS,'defs'), svg.firstChild);
-    return defs.appendChild(grad);
-    }
+    
 
 
 
