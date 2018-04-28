@@ -233,7 +233,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var overViewScene = new ScrollMagic.Scene({
       triggerElement: ".overview",
-      duration: "300%", // was 600%
+      duration: "3000px", // was 600%
       triggerHook: 0,
       
     })
@@ -282,7 +282,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var stageTitleScene = new ScrollMagic.Scene({
       triggerElement: '.stages-title',
-      duration: "150%", // was 200%
+      duration: "1500px", // was 200%
       triggerHook: 0
     })
     .setTween(stageTitleTween)
@@ -343,7 +343,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var miamScene = new ScrollMagic.Scene({
         triggerElement: '.stage-one',
-        duration: "300%", // was 600%
+        duration: "3000px", // was 600%
         triggerHook: 0
     })
     .setTween(miamTween)
@@ -403,7 +403,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var mediationScene = new ScrollMagic.Scene({
         triggerElement: '.stage-two',
-        duration: "200%", // was 600%
+        duration: "2000px", // was 600%
         triggerHook: 0
     })
     .setTween(mediationTween)
@@ -458,7 +458,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var endScene = new ScrollMagic.Scene({
         triggerElement: '.stage-three',
-        duration: "300%", // was 600%
+        duration: "3000px", // was 600%
         triggerHook: 0
     })
     .setTween(endTween)
@@ -504,7 +504,7 @@ $(function() {
     // Create the Scene and trigger when visible
     var ctaScene = new ScrollMagic.Scene({
         triggerElement: '.end-cta',
-        duration: "150%", // How many pixels to scroll / animate
+        duration: "1500px", // How many pixels to scroll / animate
         triggerHook: 0
     })
     .setTween(ctaTween)
