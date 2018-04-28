@@ -131,11 +131,11 @@ svg {
 // - apply to all animated elements
 .overview svg > g,
 .stages-title h3,
-.stage-one svg,
+// .stage-one svg,
 .stage-one .tick,
-.stage-two svg,
+// .stage-two svg,
 .stage-two svg > g,
-.stage-three svg,
+// .stage-three svg,
 .stage-three svg > g,
 .end-cta .container {
     @extend %safariFix;

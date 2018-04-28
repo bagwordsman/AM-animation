@@ -209,15 +209,15 @@ $(function() {
     overViewTween
 
     // paragraph
-    // .fromTo(".overview .paragraph", 0.25, {
-    //     opacity: 0,
-    //     transform: "translatex(-500px)"
-    // },
-    // {
-    //     opacity: 1,
-    //     transform: "translate(0px)",
-    //     ease: "ease-in-out"
-    // })
+    .fromTo(".overview .paragraph", 0.25, {
+        opacity: 0,
+        transform: "translatex(-500px)"
+    },
+    {
+        opacity: 1,
+        transform: "translate(0px)",
+        ease: "ease-in-out"
+    })
 
     // puzzle svg
     .staggerFromTo(".overview svg > g", 1.5, {
