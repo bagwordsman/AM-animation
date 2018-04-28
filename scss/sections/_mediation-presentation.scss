@@ -187,6 +187,14 @@ svg {
 .stage-one {
     @extend %stage-flex;
 
+    // resize clipboard
+    @media (min-width: 660px) {
+        .clipboard {
+            width : 60%;
+            margin-left : 20%;
+        }
+    }
+
     .tick {
         stroke : transparent;
         stroke-width : 20;

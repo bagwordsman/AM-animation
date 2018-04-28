@@ -672,6 +672,10 @@ svg {
     .stages-title h3 {
       font-size: 2.7rem; } }
 
+@media (min-width: 660px) {
+  .stage-one .clipboard {
+    width: 60%;
+    margin-left: 20%; } }
 .stage-one .tick {
   stroke: transparent;
   stroke-width: 20; }
