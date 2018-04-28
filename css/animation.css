@@ -510,11 +510,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2.5rem; }
-  @media (min-width: 660px) {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem; }
+  @media (min-width: 880px) {
     .scroll-down {
-      position: absolute;
-      bottom: 5%; } }
+      margin-top: 5rem;
+      margin-bottom: 5rem; } }
   .scroll-down span {
     color: #6a6a6a;
     margin-top: 1rem; }
@@ -524,15 +525,6 @@ body {
     transform: translateY(0);
     animation: bounce 1.2s infinite;
     animation-timing-function: ease; }
-  .end-cta .scroll-down {
-    margin-bottom: 2.5rem; }
-    @media (min-width: 660px) {
-      .end-cta .scroll-down {
-        position: relative;
-        display: block; } }
-    @media (min-width: 880px) {
-      .end-cta .scroll-down {
-        margin-bottom: 5rem; } }
 
 .graphic {
   width: 100%;
@@ -734,12 +726,6 @@ svg {
     @media (min-width: 880px) {
       .end-cta h3 {
         font-size: 2.7rem; } }
-    @media (min-width: 660px) {
-      .end-cta h3 {
-        margin-bottom: 2.5rem; } }
-    @media (min-width: 880px) {
-      .end-cta h3 {
-        margin-bottom: 5rem; } }
   .end-cta .button {
     align-self: center; }
 

@@ -35,10 +35,12 @@ body {
     flex-direction : column;
     align-items : center;
     margin-top : 2.5rem;
-    @media (min-width: 660px) {
-        position : absolute;
-        bottom : 5%;
+    margin-bottom: 2.5rem;
+    @media (min-width: 880px) {
+        margin-top : 5rem;
+        margin-bottom : 5rem;
     }
+
     span {
         color : $grey;
         margin-top : 1rem;
@@ -50,17 +52,15 @@ body {
         animation: bounce 1.2s infinite;
         animation-timing-function: ease;
     }
+
+    
     // end of animation
-    .end-cta & {
-        margin-bottom: 2.5rem;
-        @media (min-width: 660px) {
-            position : relative;
-            display : block;
-        }
-        @media (min-width: 880px) {
-            margin-bottom : 5rem;
-        }
-    }
+    // .end-cta & {
+    //     margin-bottom: 2.5rem;
+    //     @media (min-width: 880px) {
+    //         margin-bottom : 5rem;
+    //     }
+    // }
 }
 
 
@@ -258,12 +258,12 @@ svg {
 
     h3 {
         @include subHeading;
-        @media (min-width: 660px) {
-            margin-bottom : 2.5rem;
-        }
-        @media (min-width: 880px) {
-            margin-bottom : 5rem;
-        }
+        // @media (min-width: 660px) {
+        //     margin-bottom : 2.5rem;
+        // }
+        // @media (min-width: 880px) {
+        //     margin-bottom : 5rem;
+        // }
     }
 
     .button {

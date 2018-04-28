@@ -56,11 +56,7 @@ $('.end-cta a').html(ctaBtnText).attr('href', ctaBtnLink);
 $('.end-cta a').attr('data-small', ctaBtnTextSm).attr('data-big', ctaBtnText);
 
 
-// add the svgs
-$('.overview .graphic').load('svg/puzzle.svg');
-$('.stage-one .graphic').load('svg/clipboard.svg');
-$('.stage-two .graphic').load('svg/signpost.svg');
-$('.stage-three .graphic').load('svg/document.svg');
+
 
 
 
@@ -182,7 +178,11 @@ var signpostBg = getComputedStyle(document.body).getPropertyValue('--sign_grey')
 //     } : null;
 // }
 
-
+// add the svgs
+$('.overview .graphic').load('svg/puzzle.svg');
+$('.stage-one .graphic').load('svg/clipboard.svg');
+$('.stage-two .graphic').load('svg/signpost.svg');
+$('.stage-three .graphic').load('svg/document.svg');
 
 
 
@@ -194,6 +194,10 @@ var signpostBg = getComputedStyle(document.body).getPropertyValue('--sign_grey')
 $(function() {
 
     
+    
+
+
+
     // ____________________________
     // overView
     var overViewController = new ScrollMagic.Controller();
