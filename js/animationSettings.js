@@ -8,6 +8,7 @@ const animationSettings = (function() {
             // general settings
             headerOffset : 200, // scroll up to reveal header (px)
             debug : false, // add indicators
+            safariCaveat : '<h3>Please note:</h3><p>This animation is better viewed on a different browser to Safari on an iOS mobile device (iPad or iPhone). Safari mobile does not work well with the ScrollMagic JavaScript Library that this animation uses.</p>',
             
             
             

@@ -4,10 +4,29 @@ body {
     width : 100%;
     height : 100%;
     background-color : var(--bg_green);
+    position : relative;
+
+    // safari caveat: doesn't work too well on iOS safari - jumpy effect that scrollmagic can't remedy
+    .safariMobile {
+        position : absolute;
+        bottom : 0;
+        background-color : $red;
+        color : $white;
+        transition: all 1s ease-in-out;
+        height : 177px; // requires height for css3 slidetoggle
+        .container {
+            flex-direction : column;
+            align-items : flex-start;
+            padding-top : 2rem;
+            padding-bottom : 2rem;
+        }
+        .fa {
+            position : absolute;
+            right : 0;
+            cursor : pointer;
+        }
+    }
 }
-
-
-
 
 
 // main animation container

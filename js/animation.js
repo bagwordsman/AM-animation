@@ -2,11 +2,14 @@
 
 // - debug setting - add indicators
 // - add svg gradient code
+// - add safari mobile caveat
 // - add tweens (animations for each stage)
 
 "use strict";
 // debug toggle - settings
 const debug = animationSettings.debug;
+// safari message - settings
+const safariCaveat = animationSettings.safariCaveat;
 
 
 // for use in background tweens
@@ -79,6 +82,30 @@ function createGradient(svg,id,stops){
     return defs.appendChild(grad);
 }
 
+
+
+
+
+
+// ____________________________________________________________________________________
+// safari mobile caveat
+// https://stackoverflow.com/questions/3007480/determine-if-user-navigated-from-mobile-safari
+const userAgent = window.navigator.userAgent;
+
+if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+    
+    let safariMobMsg = document.createElement('div');
+    safariMobMsg.innerHTML = `<div class="container">${safariCaveat}<i class="fa fa-2x fa-times"></i></div>`;
+    safariMobMsg.classList.add('safariMobile');
+    body.appendChild(safariMobMsg);
+    
+    const removeBtn = document.querySelector('.safariMobile .fa-times');
+    safariMobMsg.addEventListener("click", function(e){
+        if (e.target == removeBtn) {
+            safariMobMsg.style.height = '0px';
+        }
+    });
+}
 
 
 
