@@ -92,10 +92,9 @@ function createGradient(svg,id,stops){
 // https://stackoverflow.com/questions/3007480/determine-if-user-navigated-from-mobile-safari
 const userAgent = window.navigator.userAgent;
 // console.log(userAgent);
-
 // if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
 
-// if (userAgent.match(/iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i)) {
+if (userAgent.match(/iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i)) {
     
     let safariMobMsg = document.createElement('div');
     safariMobMsg.classList.add('safariMobile');
@@ -109,7 +108,7 @@ const userAgent = window.navigator.userAgent;
             safariMobMsg.style.height = '0px';
         }
     });
-// }
+}
 
 
 
