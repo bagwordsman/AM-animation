@@ -184,6 +184,10 @@
 
 
     <!--  scripts  -->
+    <!-- <script src="js/es6/animationSettings.js"></script>
+    <script src="js/es6/header.js"></script>
+    <script src="js/es6/addContent.js"></script>
+    <script src="js/es6/animation.js"></script> -->
     <script src="build/animationSettings.js"></script>
     <script src="build/header.js"></script>
     <script src="build/addContent.js"></script>

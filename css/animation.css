@@ -502,6 +502,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 5;
     background-color: #e74e42;
     color: #ffffff;
     transition: all 1s ease-in-out;
@@ -514,7 +515,12 @@ body {
     body .safariMobile .fa {
       position: absolute;
       right: 0;
+      top: 2rem;
       cursor: pointer; }
+    body .safariMobile a {
+      color: #ffffff; }
+      body .safariMobile a:hover {
+        text-decoration: underline; }
 
 .animation {
   position: absolute;

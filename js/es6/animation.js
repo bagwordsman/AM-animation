@@ -91,8 +91,6 @@ function createGradient(svg,id,stops){
 // safari mobile caveat
 // https://stackoverflow.com/questions/3007480/determine-if-user-navigated-from-mobile-safari
 const userAgent = window.navigator.userAgent;
-// console.log(userAgent);
-// if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
 
 if (userAgent.match(/iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i)) {
     
