@@ -95,11 +95,12 @@ const userAgent = window.navigator.userAgent;
 
 // if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
 
-if (userAgent.match(/iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i)) {
+// if (userAgent.match(/iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i)) {
     
     let safariMobMsg = document.createElement('div');
-    safariMobMsg.innerHTML = `<div class="container">${safariCaveat}<i class="fa fa-2x fa-times"></i></div>`;
     safariMobMsg.classList.add('safariMobile');
+    safariMobMsg.innerHTML = `<div class="container">${safariCaveat}<i class="fa fa-2x fa-times"></i></div>`;
+    
     body.appendChild(safariMobMsg);
     
     const removeBtn = document.querySelector('.safariMobile .fa-times');
@@ -108,7 +109,7 @@ if (userAgent.match(/iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i)) {
             safariMobMsg.style.height = '0px';
         }
     });
-}
+// }
 
 
 

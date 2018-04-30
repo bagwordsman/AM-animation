@@ -498,7 +498,7 @@ body {
   background-color: var(--bg_green);
   position: relative; }
   body .safariMobile {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background-color: #e74e42;
     color: #ffffff;

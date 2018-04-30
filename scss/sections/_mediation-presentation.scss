@@ -8,7 +8,7 @@ body {
 
     // safari caveat: doesn't work too well on iOS safari - jumpy effect that scrollmagic can't remedy
     .safariMobile {
-        position : absolute;
+        position : fixed;
         bottom : 0;
         background-color : $red;
         color : $white;
