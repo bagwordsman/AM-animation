@@ -16,14 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Asap:400,400i,700,700i" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-
-
-
     <!-- scrollmagic -->
-    <script src="js/lib/TimelineMax.min.js"></script><!-- multiple tweens? -->
-
     <script src="js/lib/TweenMax.min.js"></script>
 	<script src="js/lib//ScrollMagic.js"></script>
 	<script src="js/lib//plugins/animation.gsap.js"></script>
@@ -193,6 +186,14 @@
 
     <!--  load scripts after page html  -->
     <script src="js/animationSettings.js"></script>
+    
+
+    <!-- new scripts (broken up with es6 refactor) -->
+    <script src="js/header.js"></script>
+    <script src="js/addContent.js"></script>
+
+
+
     <script src="js/animation.js"></script>
 
 

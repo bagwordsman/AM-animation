@@ -1,191 +1,22 @@
 // file contents:
-// - import text from animationSettings.js
-// - import svg files from svg folder
-// - add tweens (animations for each stage)
+
 // - debug setting - add indicators
 // - add svg gradient code
-// - constructor functions
+// - add tweens (animations for each stage)
 
-
-// text settings
-var titleHead = animationSettings.titleHeading,
-titleSub = animationSettings.titleSubheading,
-// overview
-overP = animationSettings.paraOverview,
-whyP = animationSettings.paraWhy,
-//stages intro
-stagesHead = animationSettings.headingStages,
-// sections
-stageOneP = animationSettings.paraOne,
-stageTwoP = animationSettings.paraTwo,
-stageThreeP = animationSettings.paraThree,
-// end cta
-ctaHead = animationSettings.endCtaHeading,
-ctaSub = animationSettings.endCtaSub,
-ctaBtnText = animationSettings.endCtaLinkText,
-ctaBtnTextSm = animationSettings.endCtaLinkTextSmall,
-ctaBtnLink = animationSettings.endCtaLink,
-
-
-
-// general settings
-debug = animationSettings.debug,
-headerOffset = animationSettings.headerOffset;
-
-
-
- 
-// ____________________________
-// add the text
-$('.title .container > h1').html(titleHead);
-$('.title .container > h3').html(titleSub);
-// $('.title .small-msg p').html(titleTip);
-
-$('.overview p').html(overP);
-
-$('.stages-title h3').html(stagesHead);
-
-$('.stage-one p').html(stageOneP);
-$('.stage-two p').html(stageTwoP);
-$('.stage-three p').html(stageThreeP);
-
-// cta
-$('.end-cta h2').html(ctaHead);
-$('.end-cta h3').html(ctaSub);
-$('.end-cta a').html(ctaBtnText).attr('href', ctaBtnLink);
-$('.end-cta a').attr('data-small', ctaBtnTextSm).attr('data-big', ctaBtnText);
-
-
-
-
-
-
-
-
-
-
-
-
-// ____________________________
-// header - scroll page to hide
-var didScroll;
-var lastScrollTop = 0;
-var delta = headerOffset; // no. of pixels to scroll up to activate header. previously set to 5
-var navbarHeight = $('.header').outerHeight();
-
-$(window).scroll(function(event){
-    didScroll = true;
-});
-
-setInterval(function() {
-    if (didScroll) {
-        hasScrolled();
-        didScroll = false;
-    }
-}, 250);
-
-function hasScrolled() {
-    var st = $(this).scrollTop();
-    
-    // Make sure they scroll more than delta
-    if(Math.abs(lastScrollTop - st) <= delta)
-        return;
-    
-    // If they scrolled down and are past the navbar, add class .nav-up.
-    // This is necessary so you never see what is "behind" the navbar.
-    if (st > lastScrollTop && st > navbarHeight){
-        // Scroll Down
-        $('.header').removeClass('down').addClass('up');
-    } else {
-        // Scroll Up
-        if(st + $(window).height() < $(document).height()) {
-            $('.header').removeClass('up').addClass('down');
-        }
-    }
-    
-    lastScrollTop = st;
-}
-
-
-
-
-
-
-// ____________________________
-// cta button - swap out text under 660px;
-
-// resize function
-$( window ).resize(function() {
-    var resize = true;
-    // cta button - text swap
-    btnText(resize);
-});
-
-
-// breakpoint for small text = 660px
-function btnText(resize) {
-
-    // small text substitute
-    if ($('body').innerWidth() < 660) {
-        var smText = $('.end-cta a').attr('data-small');
-        var currentText = $('.end-cta a').text();
-        // only run once per resize:
-        if (smText !== currentText) {
-            $('.end-cta a').text(smText);
-        }               
-    }
-
-    // large text
-    else {
-        var lgText = $('.end-cta a').attr('data-big');
-        var currentText = $('.end-cta a').text();
-        // only run once per resize:
-        if (lgText !== currentText) {
-            $('.end-cta a').text(lgText);
-        }
-
-    }
-}
-// run on load
-btnText();
-
-
-
-
-
-
-
+"use strict";
+// debug toggle - settings
+const debug = animationSettings.debug;
 
 
 // for use in background tweens
 // - make sure there is no white space
-var greenBg = getComputedStyle(document.body).getPropertyValue('--bg_green');
-var greyBg = getComputedStyle(document.body).getPropertyValue('--bg_grey');
-var orangeBg = getComputedStyle(document.body).getPropertyValue('--bg_orange');
-var blueBg = getComputedStyle(document.body).getPropertyValue('--bg_blue');
-var redBg = getComputedStyle(document.body).getPropertyValue('--bg_red');
-var signpostBg = getComputedStyle(document.body).getPropertyValue('--sign_grey');
-
-
-
-// convert hex to rgb (not required):
-// function hexToRgb(hex) {
-//     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-//     return result ? {
-//         r: parseInt(result[1], 16),
-//         g: parseInt(result[2], 16),
-//         b: parseInt(result[3], 16)
-//     } : null;
-// }
-
-// add the svgs
-// - now done with php
-// $('.overview .graphic').load('svg/puzzle.svg');
-// $('.stage-one .graphic').load('svg/clipboard.svg');
-// $('.stage-two .graphic').load('svg/signpost.svg');
-// $('.stage-three .graphic').load('svg/document.svg');
-
-
+const greenBg = getComputedStyle(document.body).getPropertyValue('--bg_green');
+const greyBg = getComputedStyle(document.body).getPropertyValue('--bg_grey');
+const orangeBg = getComputedStyle(document.body).getPropertyValue('--bg_orange');
+const blueBg = getComputedStyle(document.body).getPropertyValue('--bg_blue');
+const redBg = getComputedStyle(document.body).getPropertyValue('--bg_red');
+const signpostBg = getComputedStyle(document.body).getPropertyValue('--sign_grey');
 
 
 
@@ -197,57 +28,83 @@ var signpostBg = getComputedStyle(document.body).getPropertyValue('--sign_grey')
 // - signpost
 // - chrome bug causes gradient to not work on the pole
 // - workaround: https://stackoverflow.com/questions/10894377/dynamically-adding-a-svg-gradient
-createGradient($('.stage-two svg')[0],'PoleGradient',[
+
+
+const signSvg = document.querySelector('.stage-two svg');
+
+createGradient(signSvg, 'PoleGradient',[
     // add colour stops here
-    // '#c0c0c0'
     {offset:'0', 'stop-color':signpostBg, 'stop-opacity':1},
     {offset:'100%','stop-color':signpostBg, 'stop-opacity':0}
 ]);
 
-$('.stage-two svg path.pole').attr({
-    fill : 'url(#PoleGradient)'
-});
+signSvg.setAttribute('fill', 'url(#PoleGradient)');
+
+
+
+
 
 // this makes the gradient vertical for svg:
 // x1="0" x2="0" y1="0" y2="1"
-
 
 // svg:   the owning <svg> element
 // id:    an id="..." attribute for the gradient
 // stops: an array of objects with <stop> attributes
 function createGradient(svg,id,stops){
-var svgNS = svg.namespaceURI;
-var grad  = document.createElementNS(svgNS,'linearGradient');
-grad.setAttribute('id',id);
-// make gradient vertical:
-grad.setAttribute('x1',0);
-grad.setAttribute('x2',0);
-grad.setAttribute('y1',0);
-grad.setAttribute('y2',1);
-// add colour stops:
-for (var i=0;i<stops.length;i++){
-    var attrs = stops[i];
-    var stop = document.createElementNS(svgNS,'stop');
-    for (var attr in attrs){
-    if (attrs.hasOwnProperty(attr)) stop.setAttribute(attr,attrs[attr]);
-    }
-    grad.appendChild(stop);
+    const svgNS = svg.namespaceURI;
+    const grad  = document.createElementNS(svgNS,'linearGradient');
+    grad.setAttribute('id',id);
+    // make gradient vertical:
+    grad.setAttribute('x1',0);
+    grad.setAttribute('x2',0);
+    grad.setAttribute('y1',0);
+    grad.setAttribute('y2',1);
+
+    // es6 version
+    stops.forEach(function (value) {
+        const attributes = value;
+        const stops = document.createElementNS(svgNS,'stop');
+        // console.log(stops); note: html is added by the below code
+        for (const attr in attributes){
+            if (attributes.hasOwnProperty(attr))
+            stops.setAttribute(attr,attributes[attr]);
+        }
+        grad.appendChild(stops);
+
+    });
+
+    // apply the gradient:
+    const defs = svg.querySelector('defs') ||
+    svg.insertBefore( document.createElementNS(svgNS,'defs'), svg.firstChild);
+    return defs.appendChild(grad);
 }
 
-var defs = svg.querySelector('defs') ||
-    svg.insertBefore( document.createElementNS(svgNS,'defs'), svg.firstChild);
-return defs.appendChild(grad);
-}
+
+
+
+
+
+
 
 
 // ____________________________________________________________________________________
 // scrollmagic animations
 
 // execute the following when the document has loaded:
-$(function() {
+if (window.addEventListener)
+    window.addEventListener("load", scrollMagic, false);
+else if (window.attachEvent)
+    window.attachEvent("onload", scrollMagic);
+else window.onload = scrollMagic;
 
-    
-    
+
+
+function scrollMagic() {
+
+    // css animated elements
+    const miamTicks = Array.from(document.querySelectorAll(".stage-one .tick"));
+    const mediationSigns = Array.from(document.querySelectorAll(".stage-two svg > g"));
+    const documentElements = Array.from(document.querySelectorAll(".stage-three svg > g.signature, .stage-three svg > g.stamp"));
 
 
 
@@ -347,11 +204,7 @@ $(function() {
 
 
 
-
-
-
-
-
+    
 
     // ____________________________
     // MIAMs
@@ -368,22 +221,24 @@ $(function() {
     },
     {
         opacity: 1,
-        transform: "translatex(0px)", ease: Power2.easeOut
+        transform: "translatex(0px)",
+        ease: Power2.easeOut
     })
     // add clipboard
     .fromTo(".stage-one svg", 0.25, {
         transform: "translate(-600px, 500px)"
     },
     {
-        transform: "translate(0px)", ease: Power2.easeOut
+        transform: "translate(0px)",
+        ease: Power2.easeOut
     }, 0.5)
 
     // add ticks
     // - active getting added to first item immediately, adding delay causes fadein
-    // - empty item hack(s) added
-    .staggerTo(["", ".stage-one .tick.one", ".stage-one .tick.two", ".stage-one .tick.three", "", ""], 0, {
-        className:"+=active"
-    }, 0.35)
+    .staggerTo(miamTicks, 0.5, {
+        className:"+=active",
+        ease: Power2.easeOut
+    }, 0.5)
 
 
     // body colour
@@ -440,10 +295,9 @@ $(function() {
     }, 2)
 
     // reveal signs - fade in
-    // - empty item hack(s) added - as above
-    .staggerTo(["", ".stage-two .one", ".stage-two .two", ".stage-two .three", "", ""], 0, {
+    .staggerTo(mediationSigns, 0.5, {
         className:"+=opaque"
-    }, 1)
+    }, 0.5)
     
 
     // body colour
@@ -497,10 +351,11 @@ $(function() {
     {
         transform: "translate(0px)", ease: Power2.easeOut
     }, 0.5)
-    // add signatures
-    .staggerTo(["", ".stage-three .signature.one", ".stage-three .signature.two", ".stage-three .stamp.three", "", "", ""], 0, {
+
+    // add signatures and stamp
+    .staggerTo(documentElements, 0.5, {
         className:"+=active"
-    }, 0.35) 
+    }, 0.5) 
 
     // body colour
     .to("body", 1,  {
@@ -586,16 +441,5 @@ $(function() {
 
 
 
-
-
-
     
-
-
-
-
-
-
-
-    
-  });
+  };

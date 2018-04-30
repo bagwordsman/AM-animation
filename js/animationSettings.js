@@ -1,6 +1,7 @@
-var animationSettings = (function() {
+"use strict";
+const animationSettings = (function() {
     
-        var settings = {
+        const settings = {
             
             
             // ______________________________________________________
