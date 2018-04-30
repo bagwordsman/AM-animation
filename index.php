@@ -17,9 +17,9 @@
 
     <!-- scrollmagic -->
     <script src="js/lib/TweenMax.min.js"></script>
-	<script src="js/lib//ScrollMagic.js"></script>
-	<script src="js/lib//plugins/animation.gsap.js"></script>
-	<script src="js/lib//plugins/debug.addIndicators.js"></script>
+	<script src="js/lib/ScrollMagic.js"></script>
+	<script src="js/lib/animation.gsap.js"></script>
+	<script src="js/lib/debug.addIndicators.js"></script>
 
 
 
@@ -183,17 +183,11 @@
     </div>
 
 
-    <!--  load scripts after page html  -->
-    <script src="js/animationSettings.js"></script>
-    
-
-    <!-- new scripts (broken up with es6 refactor) -->
-    <script src="js/header.js"></script>
-    <script src="js/addContent.js"></script>
-
-
-
-    <script src="js/animation.js"></script>
+    <!--  scripts  -->
+    <script src="build/animationSettings.js"></script>
+    <script src="build/header.js"></script>
+    <script src="build/addContent.js"></script>
+    <script src="build/animation.js"></script>
 
 
 </body>
