@@ -505,8 +505,7 @@ body {
     z-index: 5;
     background-color: #e74e42;
     color: #ffffff;
-    transition: all 1s ease-in-out;
-    height: 177px; }
+    transition: all 1s ease-in-out; }
     body .safariMobile .container {
       flex-direction: column;
       align-items: flex-start;
@@ -514,11 +513,17 @@ body {
       padding-bottom: 2rem; }
     body .safariMobile .fa {
       position: absolute;
-      right: 0;
+      right: 20px;
       top: 2rem;
       cursor: pointer; }
+      @media (min-width: 660px) {
+        body .safariMobile .fa {
+          right: 0; } }
     body .safariMobile a {
-      color: #ffffff; }
+      color: #ffffff;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto; }
       body .safariMobile a:hover {
         text-decoration: underline; }
 

@@ -16,7 +16,7 @@ body {
         background-color : $red;
         color : $white;
         transition: all 1s ease-in-out;
-        height : 177px; // requires height for css3 slidetoggle
+        // height set with js for css3 slidetoggle to work.
         .container {
             flex-direction : column;
             align-items : flex-start;
@@ -25,12 +25,18 @@ body {
         }
         .fa {
             position : absolute;
-            right : 0;
+            right : 20px;
             top : 2rem;
             cursor : pointer;
+            @media (min-width: 660px) {
+                right : 0;
+            }
         }
         a {
             color : $white;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
             &:hover{
                 text-decoration : underline;
             } 

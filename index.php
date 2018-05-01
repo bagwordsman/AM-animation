@@ -188,10 +188,10 @@
     <script src="js/es6/header.js"></script>
     <script src="js/es6/addContent.js"></script>
     <script src="js/es6/animation.js"></script> -->
-    <script src="build/animationSettings.js"></script>
-    <script src="build/header.js"></script>
-    <script src="build/addContent.js"></script>
-    <script src="build/animation.js"></script>
+    <script src="js/es5/animationSettings.js"></script>
+    <script src="js/es5/header.js"></script>
+    <script src="js/es5/addContent.js"></script>
+    <script src="js/es5/animation.js"></script>
 
 
 </body>
