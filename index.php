@@ -10,18 +10,10 @@
     <link rel="apple-touch-icon" sizes="" href="img/able-apple-touch-icon.png">
 
     <!-- css -->
-    <link type="text/css" href="css/animation.css" media="all" rel="stylesheet">
+    <link type="text/css" href="css/animation.min.css" media="all" rel="stylesheet">
 
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Asap:400,400i,700,700i" rel="stylesheet">
-
-    <!-- scrollmagic -->
-    <script src="js/lib/TweenMax.min.js"></script>
-	<script src="js/lib/ScrollMagic.js"></script>
-	<script src="js/lib/animation.gsap.js"></script>
-	<script src="js/lib/debug.addIndicators.js"></script>
-
-
 
 </head>
 <body>
@@ -184,14 +176,21 @@
 
 
     <!--  scripts  -->
-    <!-- <script src="js/es6/animationSettings.js"></script>
+    <!-- scrollmagic -->
+    <script src="js/lib/TweenMax.min.js"></script>
+	<script src="js/lib/ScrollMagic.min.js"></script>
+	<script src="js/lib/animation.gsap.min.js"></script>
+
+	<!-- uncomment when working on this: -->
+    <!-- <script src="js/lib/debug.addIndicators.js"></script>
+    <script src="js/es6/animationSettings.js"></script>
     <script src="js/es6/header.js"></script>
     <script src="js/es6/addContent.js"></script>
     <script src="js/es6/animation.js"></script> -->
-    <script src="js/es5/animationSettings.js"></script>
-    <script src="js/es5/header.js"></script>
-    <script src="js/es5/addContent.js"></script>
-    <script src="js/es5/animation.js"></script>
+    <script src="js/es5/animationSettings.min.js"></script>
+    <script src="js/es5/header.min.js"></script>
+    <script src="js/es5/addContent.min.js"></script>
+    <script src="js/es5/animation.min.js"></script>
 
 
 </body>

@@ -5,6 +5,8 @@
 // - add safari mobile caveat
 // - add tweens (animations for each stage)
 
+// note: uses compiled es5 scripts. Need to switch links at bottom of index.php when working on this.
+
 "use strict";
 // debug toggle - settings
 const debug = animationSettings.debug;
