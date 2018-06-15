@@ -177,9 +177,9 @@
 
     <!--  scripts  -->
     <!-- scrollmagic -->
-    <script src="js/lib/TweenMax.min.js"></script>
-	<script src="js/lib/ScrollMagic.min.js"></script>
-	<script src="js/lib/animation.gsap.min.js"></script>
+    <script async src="js/lib/TweenMax.min.js"></script>
+	<script async src="js/lib/ScrollMagic.min.js"></script>
+	<script async src="js/lib/animation.gsap.min.js"></script>
 
 	<!-- uncomment when working on this: -->
     <!-- <script src="js/lib/debug.addIndicators.js"></script>
@@ -187,9 +187,9 @@
     <script src="js/es6/header.js"></script>
     <script src="js/es6/addContent.js"></script>
     <script src="js/es6/animation.js"></script> -->
-    <script src="js/es5/animationSettings.min.js"></script>
-    <script src="js/es5/header.min.js"></script>
-    <script src="js/es5/addContent.min.js"></script>
+    <script async src="js/es5/animationSettings.min.js"></script>
+    <script async src="js/es5/header.min.js"></script>
+    <script async src="js/es5/addContent.min.js"></script>
     <script src="js/es5/animation.min.js"></script>
 
 
